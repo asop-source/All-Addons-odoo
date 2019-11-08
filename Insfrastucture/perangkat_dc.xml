@@ -1,0 +1,68 @@
+<odoo> 
+    <data>
+
+        <record id="view_asset_perangkatdc_tree" model="ir.ui.view">
+            <field name="name">management.perangkatdc.tree</field>
+            <field name="model">management.perangkatdc</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                    <tree string="perangkatdc">
+                        <field name="penanggung_jawab"/>
+                        <field name="jabatan"/>
+                        <field name="no_reg"/>
+                        <field name="merk"/>
+                         <field name="active"/> 
+                        <field name="spesifikasi"/>
+                        <field name="fungsi"/>
+                        <field name="visit"/>
+                        <field name="note"/>
+                    </tree>
+            </field>
+        </record>
+        
+        <record id="view_management_perangkatdc_form" model="ir.ui.view">
+            <field name="name">management.perangkatdc.form</field>
+            <field name="model">management.perangkatdc</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Perangkat DC">
+                  <sheet>
+                        <div class="oe_title">
+                            <label for="no_reg" class="oe_edit_only" string="No.Reg/SN/IP"/>
+                            <h1>
+                                <field name="no_reg"/>
+                            </h1>
+                        </div>
+                    <group>
+                            <field name="penanggung_jawab"/>
+                            <field name="jabatan"/>
+                            <field name="merk"/>
+                            <field name="spesifikasi"/>
+                            <field name="fungsi"/>
+                            <field name="visit"/>
+                    </group>
+                    <notebook>
+                            <page string="Maintenance">
+                                <field name="perangkat_id">
+                                    <tree string="Maintenance">
+                                        <field name="tiket"/>
+                                        <field name="tujuan" />
+                                        <field name="start_date" />
+                                        <field name="status"/>
+                                        <field name="keterangan"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Note">
+                                <field name="note"/>
+                            </page>
+                    </notebook>
+                 </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

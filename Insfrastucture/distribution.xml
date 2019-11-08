@@ -1,0 +1,54 @@
+<odoo>
+    <data>
+
+        <record id="view_management_distribution_tree" model="ir.ui.view">
+            <field name="name">management.distribution.tree</field>
+            <field name="model">management.distribution</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                    <tree string="Distribusi">         
+                        <field name="ruang" />
+                        <field name="posisi" />
+                        <field name="no_reg"/>
+                        <field name="merk" />
+                        <field name="fungsi"/>
+                        <field name="koneksi" />
+                        <field name="distribusi" />
+                        <field name="visit" />
+                        <field name="note"/>
+                    </tree>
+            </field>
+        </record>
+
+      <record id="view_management_distribution_form" model="ir.ui.view">
+            <field name="name">management.distribution.form</field>
+            <field name="model">management.distribution</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Daftar Distribution">
+                  <sheet>
+                        <div class="oe_title">
+                            <label for="no_reg" class="oe_edit_only" string="No Registrasi / SN"/>
+                            <h1>
+                                <field name="no_reg"/>
+                            </h1>
+                        </div>
+                    <group>
+                            <field name="ruang" />
+                            <field name="posisi" />
+                            <field name="merk" />
+                            <field name="fungsi"/>
+                            <field name="koneksi" />
+                            <field name="distribusi" />
+                            <field name="visit" />
+                            <field name="note"/>
+                    </group>
+                 </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

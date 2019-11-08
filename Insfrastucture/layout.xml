@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_management_layout_tree" model="ir.ui.view">
+            <field name="name">management.data.tree</field>
+            <field name="model">management.data</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="layout">
+                    <field name="layout" /> 
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="view_management_layout_form" model="ir.ui.view">
+            <field name="name">management.data.form</field>
+            <field name="model">management.data</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="layout">
+                        <field name="name"/>
+                        <field name="image_small" class="oe_left oe_avatar" />
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>
