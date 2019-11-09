@@ -13,3 +13,4 @@ from . import docberita
 from . import docagenda
 from . import location
 from . import ruang
+from . import posisi
