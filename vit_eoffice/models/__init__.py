@@ -1,1 +1,1 @@
-import doc
+from . import doc

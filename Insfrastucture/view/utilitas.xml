@@ -1,0 +1,22 @@
+<odoo>
+	<data>
+		<record id="view_utilitas_tree" model="ir.ui.view">
+			<field name="name">view_utilitas_tree.tree</field>
+			<field name="model">management.utilitas</field>
+			<field name="type">tree</field>
+			<field name="priority" eval="8"/>
+			<field name="arch" type="xml">
+				<tree string="Management Utilitas">
+                 
+                            <field name="name"/>
+                            <field name="cpu" />
+                            <field name="ram" />
+                            <field name="disk" />
+                            <field name="trafic"/>
+                            <field name="fungsi" />
+                </tree>
+            </field>
+		</record>
+
+	</data>
+</odoo>

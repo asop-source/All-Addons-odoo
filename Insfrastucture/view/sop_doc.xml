@@ -1,0 +1,46 @@
+<odoo>
+	<data>
+		<record id="view_doc_sop_tree" model="ir.ui.view">
+			<field name="name">view_doc_sop_tree.tree</field>
+			<field name="model">management.documentsop</field>
+			<field name="type">tree</field>
+			<field name="priority" eval="8"/>
+			<field name="arch" type="xml">
+				<tree string="Dokumen SOP">
+                            <field name="no"/>
+                            <field name="code" />
+                            <field name="name" />
+                            <field name="data" />
+                            <field name="review"/>
+   			                <field name="resived" />
+                </tree>
+            </field>
+		</record>
+
+		<record id="view_doc_sop_form" model="ir.ui.view">
+			<field name="name">view_doc_sop_tree.form</field>
+			<field name="model">management.documentsop</field>
+			<field name="type">form</field>
+			<field name="priority" eval="8"/>
+			<field name="arch" type="xml">
+				<form string="Dokumen SOP">
+					<sheet>
+					<div class="oe_title" >
+						<label name="name" class="oe_edit_only" string="SOP Name"/>
+						<h1>
+                             <field name="name" />
+                       	</h1>
+					</div>
+					<group>
+                            <field name="code" />
+                            <field name="data" />
+                            <field name="review"/>
+   			                <field name="resived"/>
+   			        </group>
+   			   		</sheet>
+                </form>
+            </field>
+		</record>
+
+	</data>
+</odoo>

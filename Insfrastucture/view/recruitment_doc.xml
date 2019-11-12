@@ -1,0 +1,58 @@
+<odoo>
+	<data>
+
+		<record id="view_rekrut_tree" model="ir.ui.view">
+			<field name="name">view_rekrut_tree</field>
+			<field name="model">management.document</field>
+			<field name="type">tree</field>
+			<field name="priority" eval="8"/>
+			<field name="arch" type="xml">
+				<tree string="Dokument Recruitment">
+					<field name="no"/>
+					<field name="kode"/>
+					<field name="name"/>
+					<field name="kelamin"/>
+					<field name="usia"/>
+					<field name="pendidikan"/>
+					<field name="telp" />
+					<field name="email" />
+					<field name="file" />
+					<field name="pengalaman" />
+					<field name="catatan"/>
+				</tree>
+            </field>
+		</record>
+
+		<record id="view_rekrut_form" model="ir.ui.view">
+			<field name="name">view_rekrut_form</field>
+			<field name="model">management.document</field>
+			<field name="type">form</field>
+			<field name="priority" eval="8"/>
+			<field name="arch" type="xml">
+				<form string="Dokument Recruitment">
+				<sheet>
+					<div class="oe_title" >
+						<label name="kode" class="oe_edit_only" string="Kode"/>
+						<h1>
+                             <field name="kode"/>
+                       	</h1>
+					</div>
+					
+					<group>
+						<field name="name"/>
+						<field name="kelamin"/>
+						<field name="usia"/>
+						<field name="pendidikan"/>
+						<field name="telp" />
+						<field name="email" />
+						<field name="file" />
+						<field name="pengalaman" />
+						<field name="catatan"/>
+					</group>
+				</sheet>
+				</form>
+            </field>
+		</record>
+
+	</data>
+</odoo>

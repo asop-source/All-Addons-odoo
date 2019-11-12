@@ -1,9 +1,9 @@
-from openerp import tools
-from openerp.osv import fields,osv
-import openerp.addons.decimal_precision as dp
+from odoo import api, fields, models, _ 
+# from openerp.osv import fields,osv
+import odoo.addons.decimal_precision as dp
 import time
 import logging
-from openerp.tools.translate import _
+from odoo.tools.translate import 
 
 _logger = logging.getLogger(__name__)
 DOC_STATES =[('draft','Draft'),
@@ -11,7 +11,8 @@ DOC_STATES =[('draft','Draft'),
 		# ('confirmed','Approved'),
 		('unread','Unread'),
         ('read','Read')]
-class doc(osv.osv):
+
+class Doc(models.Model):
 	_name 		= "eo.doc"
 	_inherit 	= ['mail.thread']
 	_description = "Surat"
@@ -123,7 +124,7 @@ class doc(osv.osv):
 	def action_open(self,cr,uid,ids,context=None):
 		for doc in self.browse(cr, uid, ids, context=context):
 			if not doc.to_user_ids:
-				raise osv.except_osv(_('Error'),_("Pilih minimal satu tujuan surat") ) 
+				raise models.except_osv(_('Error'),_("Pilih minimal satu tujuan surat") ) 
 
 		self.insert_history(cr, uid, ids[0], 'Set to Need Approval')
 		return self.write(cr,uid,ids,{'state':DOC_STATES[1][0]},context=context)
@@ -239,8 +240,8 @@ class doc(osv.osv):
 		}
 		return results
 
-class to_user(osv.osv):
-	_name 		= "eo.to_user"
+class to_user(models.Model):
+	_name 		= 'eo.to_user'
 	_rec_name   = 'user_id'
 	_columns 	= {
 		'user_id' 	: fields.many2one('res.users', 'User'),
@@ -248,8 +249,8 @@ class to_user(osv.osv):
 		'read_status': fields.boolean("Read"),
 	}
 
-class cc_user(osv.osv):
-	_name 		= "eo.cc_user"
+class cc_user(models.Model):
+	_name 		= 'eo.cc_user'
 	_rec_name   = 'user_id'
 	_columns 	= {
 		'user_id' 	: fields.many2one('res.users', 'User'),
@@ -257,23 +258,23 @@ class cc_user(osv.osv):
 		'read_status': fields.boolean("Read"),
 	}
 
-class doc_type(osv.osv):
-	_name 		= "eo.doc_type"
+class doc_type(models.Model):
+	_name 		= 'eo.doc_type'
 	_columns 	= {
 		'code'			: fields.char('Kode', required=True),		
 		'name'			: fields.char('Nama', required=True),		
 	}
 
-class doc_template(osv.osv):
-	_name 		= "eo.doc_template"
+class doc_template(models.Model):
+	_name 		= 'eo.doc_template'
 	_columns 	= {
 		'code'			: fields.char('Kode', required=True),		
 		'name'			: fields.char('Nama', required=True),		
 		'body'			: fields.text('Isi', required=True),		
 	}
 
-class doc_history(osv.osv):
-	_name 		= "eo.doc_history"
+class doc_history(models.Model):
+	_name 		= 'eo.doc_history'
 	_columns 	= {
 		'name'		: fields.char('History'),
 		'user_id'	: fields.many2one('res.users', 'By'),

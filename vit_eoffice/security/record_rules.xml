@@ -1,4 +1,4 @@
-<openerp>
+<odoo>
 	<data noupdate="0">
 		<record id="only_receipent_or_sender" model="ir.rule">
 			<field name="name">Cuma sender dan recipents yang bisa lihat surat</field>
@@ -19,4 +19,4 @@
 ] </field>
 		</record>        
     </data>
-</openerp>
+</odoo>
