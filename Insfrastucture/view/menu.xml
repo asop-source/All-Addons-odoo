@@ -25,7 +25,7 @@
 			</field>
 		</record>
 
-        <record id="action_layout_list" model="ir.actions.act_window">
+<!--         <record id="action_layout_list" model="ir.actions.act_window">
 			<field name="name">Daftar Layout</field>
 			<field name="res_model">management.data</field>
 			<field name="view_mode">tree,form</field>
@@ -35,7 +35,7 @@
               </p>
 				<p>klik tombol create untuk bikin Layout baru</p>
 			</field>
-		</record>
+		</record> -->
 
 		<record id="action_lan_distribution_list" model="ir.actions.act_window">
 			<field name="name">Daftar Lan Distribution</field>
@@ -182,7 +182,7 @@
 		</record>
 
 		<record id="action_fungsi_list" model="ir.actions.act_window">
-			<field name="name">action_fungsi_list</field>
+			<field name="name">Daftar Master Fungsi</field>
 			<field name="res_model">master.fungsi</field>
 			<field name="view_mode">tree,form</field>
 			<field name="help" type="html">
@@ -194,7 +194,7 @@
 		</record>
 
 		<record id="action_spesifikasi_list" model="ir.actions.act_window">
-			<field name="name">action_spesifikasi_list</field>
+			<field name="name">Daftar Master Spesifikasi</field>
 			<field name="res_model">master.spesifikasi</field>
 			<field name="view_mode">tree,form</field>
 			<field name="help" type="html">
@@ -206,7 +206,7 @@
 		</record>
 
 		<record id="action_koneksi_list" model="ir.actions.act_window">
-			<field name="name">action_koneksi_list</field>
+			<field name="name">Daftar Master Connection</field>
 			<field name="res_model">master.koneksi</field>
 			<field name="view_mode">tree,form</field>
 			<field name="help" type="html">
@@ -218,7 +218,7 @@
 		</record>
 
 		<record id="action_cpu_list" model="ir.actions.act_window">
-			<field name="name">action_cpu_list</field>
+			<field name="name">Daftar Master CPU</field>
 			<field name="res_model">master.cpu</field>
 			<field name="view_mode">tree,form</field>
 			<field name="help" type="html">
@@ -230,7 +230,7 @@
 		</record>
 
 		<record id="action_ram_list" model="ir.actions.act_window">
-			<field name="name">action_ram_list</field>
+			<field name="name">Daftar Master RAM</field>
 			<field name="res_model">master.ram</field>
 			<field name="view_mode">tree,form</field>
 			<field name="help" type="html">
@@ -242,7 +242,7 @@
 		</record>
 
 		<record id="action_disk_list" model="ir.actions.act_window">
-			<field name="name">action_disk_list</field>
+			<field name="name">Daftar Master DISK</field>
 			<field name="res_model">master.disk</field>
 			<field name="view_mode">tree,form</field>
 			<field name="help" type="html">
@@ -254,7 +254,7 @@
 		</record>
 
 		<record id="action_pendidikan_list" model="ir.actions.act_window">
-			<field name="name">action_pendidikan_list</field>
+			<field name="name">Daftar Master Pendidikan</field>
 			<field name="res_model">master.pendidikan</field>
 			<field name="view_mode">tree,form</field>
 			<field name="help" type="html">
@@ -266,7 +266,7 @@
 		</record>
 
 		<record id="action_kelamin_list" model="ir.actions.act_window">
-			<field name="name">action_kelamin_list</field>
+			<field name="name">Daftar Master Jenis Kelamin</field>
 			<field name="res_model">master.kelamin</field>
 			<field name="view_mode">tree,form</field>
 			<field name="help" type="html">
@@ -278,7 +278,7 @@
 		</record>
 
 		<record id="action_publish_list" model="ir.actions.act_window">
-			<field name="name">action_publish_list</field>
+			<field name="name">Daftar Master Publish</field>
 			<field name="res_model">master.berita</field>
 			<field name="view_mode">tree,form</field>
 			<field name="help" type="html">
@@ -310,11 +310,11 @@
 				  action="action_power_distribusion_list"
 				  sequence="1" />
 
-		<menuitem id="home_4"
+<!-- 		<menuitem id="home_4"
 				  name="Layout"
 				  parent="home_1"
 				  action="action_layout_list"
-				  sequence="1" />
+				  sequence="1" /> -->
 
 		<menuitem id="home_5"
 				  name="Lan Distribution"

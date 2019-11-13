@@ -1,0 +1,49 @@
+<odoo>
+	<data>
+		<record id="view_management_capacity_tree" model="ir.ui.view">
+			<field name="name">view_management_capacity_tree.tree</field>
+			<field name="model">management.capacity</field>
+			<field name="type">tree</field>
+			<field name="priority" eval="8"/>
+			<field name="arch" type="xml">
+				<tree string="Rack Server">
+                    <field name="name" />
+                    <field name="rack" />
+                    <field name="available" />
+                    <field name="taken_used" />
+                    <field name="taken_available" widget="progressbar" />
+                </tree>
+            </field>
+		</record>
+
+		<record id="view_management_ruang_form" model="ir.ui.view">
+			<field name="name">view_management_ruang.form</field>
+			<field name="model">management.capacity</field>
+			<field name="type">form</field>
+			<field name="priority" eval="8"/>
+			<field name="arch" type="xml">
+				<form string="Berita">
+					<sheet>
+					<div class="oe_title" >
+						<label name="name" class="oe_edit_only" string="Name Ruang"/>
+						<h1>
+                             <field name="name" />
+                       	</h1>
+					</div>
+					<group>                           	
+                            <field name="rack" />
+                            <field name="available" />
+   			        </group>
+   			      		 <notebook>
+                            <page string="Daftar Rack">
+                                <field name="perangkat_id">
+                                </field>
+                            </page>
+                    </notebook>
+   			   		</sheet>
+                </form>
+            </field>
+		</record>
+
+	</data>
+</odoo>

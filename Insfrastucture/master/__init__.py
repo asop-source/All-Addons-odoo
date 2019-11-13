@@ -11,3 +11,4 @@ from . import merk
 from . import pendidikan
 from . import kelamin
 from . import publish
+from . import rack

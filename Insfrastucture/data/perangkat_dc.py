@@ -19,6 +19,8 @@ class perangkatdc(models.Model):
 
 		perangkat_id = fields.One2many(comodel_name="management.maintenance", inverse_name="maintenance_id",
 									string="Maintenance", required=False)
+		
+		capacity_id = fields.Many2one(comodel_name="management.capacity", string="Capacity")
 
 		taken_visit = fields.Float(compute="_calc_taken_visit", string="Taken Visit", required=False, )
 

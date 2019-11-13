@@ -5,4 +5,3 @@ class Ruang(models.Model):
 
 	kode = fields.Integer(string="No ID")
 	name = fields.Char(string="Nama Ruang")
-

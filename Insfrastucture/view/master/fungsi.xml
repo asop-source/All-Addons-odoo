@@ -1,0 +1,34 @@
+<odoo>
+	<data>
+		<record id="view_fungsi_tree" model="ir.ui.view">
+			<field name="name">view_fungsi.tree</field>
+			<field name="model">master.fungsi</field>
+			<field name="type">tree</field>
+			<field name="priority" eval="8"/>
+			<field name="arch" type="xml">
+				<tree string="Master Fungsi">
+                    <field name="kode"/>
+                    <field name="name" />
+                </tree>
+            </field>
+		</record>
+
+		<record id="view_fungsi_form" model="ir.ui.view">
+			<field name="name">view_fungsi.form</field>
+			<field name="model">master.fungsi</field>
+			<field name="type">form</field>
+			<field name="priority" eval="8"/>
+			<field name="arch" type="xml">
+				<form string="Master Fungsi">
+					<sheet>
+						<group>
+		                    <field name="kode"/>
+		                    <field name="name" />
+		                </group>
+		            </sheet>
+                </form>
+            </field>
+		</record>
+
+	</data>
+</odoo>

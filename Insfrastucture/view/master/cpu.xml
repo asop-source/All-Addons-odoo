@@ -1,0 +1,34 @@
+<odoo>
+	<data>
+		<record id="view_cpu_tree" model="ir.ui.view">
+			<field name="name">view_cpu.tree</field>
+			<field name="model">master.cpu</field>
+			<field name="type">tree</field>
+			<field name="priority" eval="8"/>
+			<field name="arch" type="xml">
+				<tree string="Master CPU">
+                    <field name="kode"/>
+                    <field name="name" />
+                </tree>
+            </field>
+		</record>
+		
+		<record id="view_cpu_form" model="ir.ui.view">
+			<field name="name">view_cpu.form</field>
+			<field name="model">master.cpu</field>
+			<field name="type">form</field>
+			<field name="priority" eval="8"/>
+			<field name="arch" type="xml">
+				<form string="Master CPU">
+					<sheet>
+						<group>
+		                    <field name="kode"/>
+		                    <field name="name" />
+		                </group>
+		            </sheet>
+                </form>
+            </field>
+		</record>
+
+	</data>
+</odoo>
