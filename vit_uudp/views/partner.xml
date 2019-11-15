@@ -1,0 +1,12 @@
+<odoo>
+        <record id="view_partner_analytic_tag" model="ir.ui.view">
+            <field name="name">res.partner.tag</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="ref" position="before">
+                    <field name="account_analytic_tag_id" options='{"no_create": 1, "no_create_edit": 1, "no_open": 1}' groups="account.group_account_user"/>
+                </field>
+            </field>
+        </record>
+</odoo>

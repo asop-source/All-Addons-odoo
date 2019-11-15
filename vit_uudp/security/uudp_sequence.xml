@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data noupdate="0">		
+
+		<record id="uudp_pencairan_sequence" model="ir.sequence">
+			<field name="name">uudp pencairan</field>
+			<field name="code">uudp.pencairan</field>
+			<field name="prefix">PCR/%(month)s%(y)s/</field>
+			<field name="padding">4</field>
+			<field name="company_id" eval="False"/>
+		</record>
+
+		<record id="uudp_reimburse_sequence" model="ir.sequence">
+			<field name="name">uudp reimburse</field>
+			<field name="code">uudp_reimburse_sequence</field>
+			<field name="prefix">RB/%(month)s%(y)s/</field>
+			<field name="padding">4</field>
+			<field name="company_id" eval="False"/>
+		</record>
+
+		<record id="uudp_pengajuan_sequence" model="ir.sequence">
+			<field name="name">uudp</field>
+			<field name="code">uudp_pengajuan_sequence</field>
+			<field name="prefix">PJ/%(month)s%(y)s/</field>
+			<field name="padding">4</field>
+			<field name="company_id" eval="False"/>
+		</record>
+
+		<record id="uudp_penyelesaian_sequence" model="ir.sequence">
+			<field name="name">uudp</field>
+			<field name="code">uudp_penyelesaian_sequence</field>
+			<field name="prefix">PL/%(month)s%(y)s/</field>
+			<field name="padding">4</field>
+			<field name="company_id" eval="False"/>
+		</record>
+
+	</data>
+</odoo>

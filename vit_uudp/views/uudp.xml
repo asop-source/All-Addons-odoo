@@ -1,0 +1,1160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <record id="vit_journal_uudp" model="ir.ui.view">
+            <field name="name">account.journal.uudp.form</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="arch" type="xml">      
+                <xpath expr="//field[@name='post_at_bank_rec']" position="before">
+                    <field name="show_on_uudp" />
+                </xpath>   
+            </field>
+        </record>
+
+        <record id="view_move_line_analityc_tag_tree" model="ir.ui.view">
+            <field name="name">account.move.line.tree</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_move_line_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='account_id']" position="after">
+                    <field name="analytic_tag_ids"
+                           options="{'no_create': True}"/>
+                </xpath>
+            </field>
+        </record>
+
+    <record id="view_move_analityc_tag_form" model="ir.ui.view">
+        <field name="name">account.move.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='line_ids']/tree//field[@name='analytic_account_id']"
+                   position="after">
+                <field name="analytic_tag_ids" groups="analytic.group_analytic_accounting"
+                       options="{'no_create': True}" widget="many2many_tags"/>
+            </xpath>
+        </field>
+    </record>
+
+        <record id="view_uudp_tree" model="ir.ui.view">
+            <field name="name">uudp.tree</field>
+            <field name="model">uudp</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="UUDP List">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="end_date"/>
+                    <field name="user_id"/>
+                    <field name="department_id"/>
+                    <field name="responsible_id"/>
+                    <field name="total_ajuan" sum="Total Amount"/>
+                    <field name="total_pencairan" sum="Total Amount"/>
+                    <field name="state"/>
+                    <field name="pencairan_id"/>
+                    <field name="tgl_pencairan"/>
+                    <field name="tgl_penyelesaian"/>
+                    <field name="selesai_id" invisible="1"/>
+                    <field name="penyelesaian_id" invisible="1"/>
+                    <field name="journal_id" invisible="1"/>
+                    <field name="cara_bayar"/>
+                    <field name="bank_id"/>
+                    <field name="no_rekening"/>
+                    <field name="notes"/>
+                    <field name="company_id"/>
+                </tree>
+            </field>
+        </record>        
+
+        <record id="view_uudp_reimburse_tree" model="ir.ui.view">
+            <field name="name">uudp.tree</field>
+            <field name="model">uudp</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="UUDP List">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="end_date"/>
+                    <field name="user_id"/>
+                    <field name="department_id"/>
+                    <field name="responsible_id"/>
+                    <field name="total_ajuan" sum="Total Amount"/>
+                    <field name="total_pencairan" sum="Total Amount"/>
+                    <field name="state"/>
+                    <field name="pencairan_id"/>
+                    <field name="tgl_pencairan"/>
+                    <field name="journal_id" invisible="1"/>
+                    <field name="cara_bayar"/>
+                    <field name="bank_id"/>
+                    <field name="no_rekening"/>
+                    <field name="coa_kredit"/>
+                    <field name="notes"/>
+                    <field name="company_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_uudp_pengajuan_form" model="ir.ui.view">
+            <field name="name">uudp.pengajuan.form</field>
+            <field name="model">uudp</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <form string="UUDP Pengajuan Form" create="false">
+                <header>
+                    <button name="button_confirm" 
+                            states="draft" 
+                            string="Confirm" 
+                            type="object" 
+                            class="oe_highlight"/>
+
+                    <button name="button_confirm_department" 
+                            states="confirm" 
+                            string="Confirm" 
+                            type="object" 
+                            class="oe_highlight"
+                            groups="vit_uudp.group_user_uudp_manager"/>
+
+                    <button name="button_confirm_hrd" 
+                            states="confirm_department1" 
+                            string="Confirm" 
+                            type="object" 
+                            class="oe_highlight"
+                            groups="hr.group_hr_manager"/>
+
+                    <button name="button_re_confirm_department" 
+                            states="pending" 
+                            string="Re Confirm" 
+                            type="object" 
+                            groups="vit_uudp.group_user_uudp_manager"/>
+
+                    <button name="button_confirm_finance" 
+                            states="confirm_hrd,confirm_department"
+                            string="Confirm" 
+                            type="object" 
+                            class="oe_highlight"
+                            groups="account.group_account_manager"/>
+
+                    <button name="button_pending" 
+                            states="confirm_hrd,confirm_department"
+                            string="Pending" 
+                            type="object" 
+                            class="oe_highlight"
+                            groups="account.group_account_manager"/>
+
+                    <button name="button_confirm_accounting" 
+                            attrs="{'invisible': ['|',('state','!=','confirm_finance'),('pencairan_id','=',False)]}"
+                            string="Confirm" 
+                            type="object" 
+                            class="oe_highlight"
+                            groups="account.group_account_manager"/>
+                    
+                    <button name="button_cancel" 
+                            confirm="Anda yakin data akan di cancel ?"
+                            states="confirm,confirm_finance,pending"
+                            string="Cancel" 
+                            type="object"
+                            groups="vit_uudp.group_user_uudp_manager"/>
+
+                    <button name="button_refuse" 
+                            confirm="Anda yakin data akan di refuse ?"
+                            states="confirm" 
+                            string="Refuse" 
+                            type="object"
+                            groups="vit_uudp.group_user_uudp_manager"/>
+
+                    <button name="button_cancel_hrd" 
+                            confirm="Anda yakin data akan di cancel ?"
+                            states="confirm_department1" 
+                            string="Cancel" 
+                            type="object"
+                            groups="hr.group_hr_manager"/>
+
+                    <button name="button_refuse_hrd" 
+                            confirm="Anda yakin data akan di refuse ?"
+                            states="confirm_department1" 
+                            string="Refuse" 
+                            type="object"
+                            groups="hr.group_hr_manager"/>
+
+                    <button name="button_cancel" 
+                            confirm="Anda yakin data akan di cancel ?"
+                            states="confirm_department,confirm_hrd" 
+                            string="Cancel" 
+                            type="object"
+                            groups="account.group_account_manager"/>
+
+                    <button name="button_refuse_finance" 
+                            confirm="Anda yakin data akan di refuse ?"
+                            states="confirm_department,confirm_hrd" 
+                            string="Refuse" 
+                            type="object"
+                            groups="account.group_account_manager"/>
+
+                    <button name="button_validate" 
+                            attrs="{'invisible': ['|',('state','!=','confirm_accounting'),('type','=','penyelesaian')]}"
+                            string="Validate" 
+                            class="oe_highlight"
+                            confirm="Anda yakin data akan di validasi ?"
+                            type="object"
+                            groups="account.group_account_manager"/>
+
+                    <button name="button_set_to_draft" 
+                            states="cancel" 
+                            string="Set to Draft" 
+                            type="object"
+                            groups="vit_uudp.group_user_uudp_manager,hr.group_hr_manager,account.group_account_manager"/>
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,done" statusbar_colors='{"draft":"red","confirm":"blue"}' readonly="1"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Code" />
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="user_id" attrs="{'readonly': [('state','!=','draft')]}" options='{"no_create": 1, "no_open": 1}' domain="[('id','=',user_id)]"/>
+                            <field name="date" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="end_date" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="responsible_id" attrs="{'readonly': [('state','!=','draft')]}" options='{"no_create": 1, "no_open": 1}' required="1"/>
+                            <field name="department_id" attrs="{'readonly': [('state','!=','draft')], 'invisible': [('responsible_id','=',False)], 'required': [('type','in',('reimberse','pengajuan'))]}" options='{"no_create": 1, "no_open": 1}' domain="[('company_id','=',company_id)]"/>
+                            <field name="journal_entry_id" options='{"no_create": 1, "no_open": 1}' attrs="{'invisible': [('journal_entry_id','=',False)]}" groups="account.group_account_manager" readonly="1"/>
+                            <field name="selesai_id" invisible="1"/>
+                            <field name="penyelesaian_id" readonly="1" attrs="{'invisible': [('penyelesaian_id','=',False)]}" options='{"no_create": 1, "no_open": 1}'/>
+                            <field name="tgl_penyelesaian" attrs="{'invisible': [('penyelesaian_id','=',False)],'readonly': [('state','in',('done','cancel','refuse'))]}" />
+                        </group>
+                        <group>
+                            <field name="type" attrs="{'readonly': [('state','!=','draft')]}" invisible="1"/>
+                            <field name="total_ajuan" invisible="1"/>
+                            <field name="type_pencairan" invisible="1"/>
+                            <field name="total_pencairan" attrs="{'invisible': [('total_pencairan','=',0.0)]}" readonly="1"/>
+                            <field name="cara_bayar" attrs="{'readonly': [('state','in',('done','cancel','refuse'))]}" required="1"/>
+                            <field name="bank_id" attrs="{'readonly': [('state','in',('done','cancel','refuse'))], 'invisible': [('cara_bayar','!=','transfer')], 'required': [('cara_bayar','=','transfer')]}" options='{"no_create": 1, "no_open": 1}'/>
+                            <field name="no_rekening" attrs="{'readonly': [('state','in',('done','cancel','refuse'))], 'invisible': [('cara_bayar','!=','transfer')], 'required': [('cara_bayar','=','transfer')]}"/>
+                            <field name="atas_nama" attrs="{'readonly': [('state','in',('done','cancel','refuse'))], 'invisible': [('cara_bayar','!=','transfer')], 'required': [('cara_bayar','=','transfer'),('state','=','draft'),('type','!=','penyelesaian')]}"/>
+                            <field name="need_driver" attrs="{'readonly': [('state','!=','draft')],'invisible': [('type','!=','pengajuan')]}"/>
+                            <field name="company_id" attrs="{'readonly': [('state','!=','draft')]}" options='{"no_create": 1, "no_open": 1, "no_open": 1}'/>
+                            <field name="selesai" invisible="1"/>
+                            <field name="pencairan_id" readonly="1" attrs="{'invisible': [('pencairan_id','=',False)]}"/>
+                            <field name="tgl_pencairan" attrs="{'invisible': [('pencairan_id','=',False)],'readonly': [('state','in',('done','cancel','refuse'))]}" />
+                            
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Detail">
+                            <field name="uudp_ids" mode="tree" required="1" attrs="{'readonly': [('state','in',('done','cancel','refuse'))]}">
+                                <tree editable="bottom">
+                                    <field name="product_id" required="1" options='{"no_create": 1, "no_open": 1}' domain="[('can_be_expensed','=',True),('uudp','=',True)]"/>
+                                    <field name="description" />
+                                    <field name="qty" sum="Total Amount"/>
+                                    <field name="uom" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                    <field name="coa_debit" groups="account.group_account_manager" options='{"no_create": 1, "no_open": 1}' domain="[('company_id','=',parent.company_id)]" string="Account"/>
+                                    <field name="partner_id" options='{"no_create": 1, "no_open": 1}'/>
+                                    <field name="store_id" options='{"no_create": 1, "no_open": 1}' domain="[('account_analytic_tag_id','!=',False)]"/>
+                                    <field name="unit_price" />
+                                    <field name="sub_total" sum="Total Amount"/>
+                                    <field name="total" invisible="1"/>
+                                    <field name="state" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Information"  groups="account.group_account_manager">
+                            <group>
+                                <group>
+                                    <field name="coa_debit" domain="[('company_id','=',company_id)]" attrs="{'readonly':[('state','=','done')]}"  options='{"no_create": 1, "no_open": 1}'/>
+                                </group>
+                            </group>
+                        </page>                        
+                    </notebook>
+                    <separator string="Notes"/>
+                    <field name="notes" required="1"/>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+            </field>
+        </record>        
+
+        <record id="view_uudp_line_form" model="ir.ui.view">
+            <field name="name">uudp.line.form</field>
+            <field name="model">uudp.detail</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <form string="UUDP Line Form">
+                <sheet>
+                    <group>
+                        <field name="uudp_id" invisible="1"/>
+                        <field name="product_id" required="1" attrs="{'readonly': [('state','!=','draft')]}" options='{"no_create": 1, "no_open": 1}' domain="[('can_be_expensed','=',True),('uudp','=',True)]"/>
+                        <field name="description" attrs="{'readonly':[('state','!=','draft')]}"/>
+                        <field name="qty" sum="Total Amount" attrs="{'readonly':[('state','=','done')]}"/>
+                        <field name="uom" attrs="{'readonly': [('state','!=','draft')]}"/>
+                        <field name="coa_debit" invisible="1"/>
+                        <field name="partner_id" options='{"no_create": 1, "no_open": 1}'/>
+                        <field name="store_id" options='{"no_create": 1, "no_open": 1, "no_open": 1}' domain="[('account_analityc_tag_id','!=',False)]"/>
+                        <field name="unit_price" attrs="{'readonly':[('state','=','done')]}"/>
+                        <field name="sub_total" sum="Total Amount"/>
+                        <field name="total" invisible="1"/>
+                        <field name="state" invisible="1"/>
+                    </group>                       
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+            </field>
+        </record>
+
+        <record id="view_uudp_penyelesaian_form" model="ir.ui.view">
+            <field name="name">uudp.penyelesaian.form</field>
+            <field name="model">uudp</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <form string="UUDP Form" create="false">
+                <header>
+                    <button name="button_confirm" 
+                            states="draft" 
+                            string="Confirm" 
+                            type="object" 
+                            class="oe_highlight"
+                            groups=""/>
+                    
+                    <button name="button_confirm_department" 
+                            attrs="{'invisible': ['|',('state','!=','confirm'),('type','!=','reimberse')]}"
+                            string="Confirm" 
+                            type="object" 
+                            class="oe_highlight"
+                            groups="vit_uudp.group_user_uudp_manager"/>
+
+                    <button name="button_cancel" 
+                            confirm="Anda yakin data akan di cancel ?"
+                            attrs="{'invisible': ['|',('state','!=','confirm'),('type','!=','reimberse')]}"
+                            string="Cancel" 
+                            type="object"
+                            groups="vit_uudp.group_user_uudp_manager"/>
+
+                    <button name="button_refuse" 
+                            confirm="Anda yakin data akan di refuse ?"
+                            attrs="{'invisible': ['|',('state','!=','confirm'),('type','!=','reimberse')]}"
+                            string="Refuse" 
+                            type="object"
+                            groups="vit_uudp.group_user_uudp_manager"/>
+
+                    <button name="button_confirm_finance" 
+                            attrs="{'invisible': ['|',('state','!=','confirm'),('type','!=','penyelesaian')]}"
+                            string="Confirm" 
+                            type="object" 
+                            class="oe_highlight"
+                            groups="account.group_account_manager"/>
+
+                    <button name="button_confirm_finance" 
+                            states="confirm_hrd,confirm_department"
+                            string="Confirm" 
+                            type="object" 
+                            class="oe_highlight"
+                            groups="account.group_account_manager"/>
+
+                    <button name="button_confirm_accounting" 
+                            attrs="{'invisible': ['|',('state','!=','confirm_finance'),('pencairan_id','=',False)]}"
+                            string="Confirm" 
+                            type="object" 
+                            class="oe_highlight"
+                            groups="account.group_account_manager"/>
+
+                    <button name="button_cancel" 
+                            confirm="Anda yakin data akan di cancel ?"
+                            attrs="{'invisible': ['|',('state','!=','confirm'),('type','!=','penyelesaian')]}"
+                            string="Cancel" 
+                            type="object"
+                            groups="account.group_account_manager"/>
+
+                    <button name="button_cancel" 
+                            confirm="Anda yakin data akan di cancel ?"
+                            attrs="{'invisible': ['|',('state','!=','confirm_department'),('type','!=','reimberse')]}"
+                            string="Cancel" 
+                            type="object"
+                            groups="account.group_account_manager"/>
+
+                    <button name="button_refuse_finance" 
+                            confirm="Anda yakin data akan di refuse ?"
+                            attrs="{'invisible': ['|',('state','!=','confirm'),('type','!=','penyelesaian')]}"
+                            string="Refuse" 
+                            type="object"
+                            groups="account.group_account_manager"/>
+
+                    <button name="button_refuse_finance" 
+                            confirm="Anda yakin data akan di refuse ?"
+                            attrs="{'invisible': ['|',('state','!=','confirm_department'),('type','!=','reimberse')]}"
+                            string="Refuse" 
+                            type="object"
+                            groups="account.group_account_manager"/>
+
+                    <button name="button_validate" 
+                            attrs="{'invisible': ['|',('state','!=','confirm_accounting'),('type','=','penyelesaian')]}"
+                            string="Validate" 
+                            class="oe_highlight"
+                            confirm="Anda yakin data akan di validasi ?"
+                            type="object"
+                            groups="account.group_account_manager"/>
+
+
+                    <button name="button_done_finance" 
+                            attrs="{'invisible': ['|',('state','!=','confirm_accounting'),('type','!=','penyelesaian')]}"
+                            string="Confirm" 
+                            type="object" 
+                            class="oe_highlight"
+                            groups="account.group_account_manager"/>
+
+                    <button name="button_done_finance" 
+                            attrs="{'invisible': ['|',('state','!=','confirm_finance'),('type','!=','penyelesaian')]}"
+                            string="Confirm" 
+                            type="object" 
+                            class="oe_highlight"
+                            groups="account.group_account_manager"/>
+
+                    <button name="button_cancel"
+                            confirm="Anda yakin data akan di cancel ?"
+                            states="confirm_finance"
+                            string="Cancel" 
+                            type="object" 
+                            groups="account.group_account_manager"/>
+
+                    <button name="button_set_to_draft" 
+                            states="cancel" 
+                            string="Set to Draft" 
+                            type="object"
+                            class="oe_highlight"
+                            groups="account.group_account_manager"/>
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm,done" statusbar_colors='{"draft":"red","confirm":"blue"}' readonly="1"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Code" />
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="is_user_pencairan" invisible="1"/>
+                            <field name="user_id" attrs="{'readonly': ['|','&amp;',('state','=','confirm'),('is_user_pencairan','!=', True),('state','=','done')]}" options='{"no_create": 1, "no_open": 1}'/>
+                            <field name="date" attrs="{'readonly': ['|','&amp;',('state','=','confirm'),('is_user_pencairan','!=', True),('state','=','done')]}"/>
+                            <field name="responsible_id" attrs="{'readonly': ['|','&amp;',('state','=','confirm'),('is_user_pencairan','!=', True),('state','=','done')], 'invisible': [('type','!=','reimberse')], 'required': [('type','=','reimberse')]}" options='{"no_create": 1, "no_open": 1}'/>
+                            <field name="department_id"  attrs="{'readonly': ['|','&amp;',('state','=','confirm'),('is_user_pencairan','!=', True),('state','=','done')], 'invisible': [('type','!=','reimberse')], 'required': [('type','=','reimberse')]}" options='{"no_create": 1, "no_open": 1}' domain="[('company_id','=',company_id)]"/>
+                        </group>
+                        <group>
+                            <field name="type" attrs="{'readonly': [('state','!=','draft')]}" invisible="1"/>
+                            <field name="ajuan_id" attrs="{'invisible': [('type','!=','penyelesaian')], 'required':[('type','=','penyelesaian')], 'readonly': ['|','&amp;',('state','=','confirm'),('is_user_pencairan','!=', True),('state','=','done')]}" domain="[('company_id','=',company_id),('type','=','pengajuan'),('state','=','done'),('selesai','=',False),'|',('user_id','=',user_id),('responsible_id','=',user_id)]" options='{"no_create": 1, "no_open": 1}'/>
+                            <field name="total_ajuan" attrs="{'required':[('type','=','penyelesaian')], 'readonly': ['|','&amp;',('state','=','confirm'),('is_user_pencairan','!=', True),('state','=','done')]}" invisible="1"/>
+                            <field name="total_ajuan_penyelesaian" attrs="{'required':[('type','=','penyelesaian')], 'invisible':[('type','=','reimberse')]}"/>
+                            <field name="total_pencairan" invisible="1"/>
+                            <field name="cara_bayar" attrs="{'readonly': ['|','&amp;',('state','=','confirm'),('is_user_pencairan','!=', True),('state','=','done')], 'invisible': [('type','=','penyelesaian')]}" required="1"/>
+                            <field name="bank_id" attrs="{'readonly': ['|','&amp;',('state','=','confirm'),('is_user_pencairan','!=', True),('state','=','done')], 'invisible': ['|',('cara_bayar','!=','transfer'),('type','=','penyelesaian')], 'required': [('cara_bayar','=','transfer')]}" options='{"no_create": 1, "no_open": 1}'/>
+                            <field name="no_rekening" attrs="{'readonly': ['|','&amp;',('state','=','confirm'),('is_user_pencairan','!=', True),('state','=','done')], 'invisible': ['|',('cara_bayar','!=','transfer'),('type','=','penyelesaian')], 'required': [('cara_bayar','=','transfer')]}"/>
+                            <field name="atas_nama" attrs="{'readonly': ['|','&amp;',('state','=','confirm'),('is_user_pencairan','!=', True),('state','=','done')], 'invisible': ['|',('cara_bayar','!=','transfer'),('type','=','penyelesaian')], 'required': [('cara_bayar','=','transfer'),('state','=','draft'),('type','!=','penyelesaian')]}"/>
+                            <field name="journal_id" attrs="{'readonly': ['|','&amp;',('state','=','confirm'),('is_user_pencairan','!=', True),('state','=','done')], 'invisible' : [('type','=','penyelesaian')]}" options='{"no_create": 1, "no_open": 1}' domain="[('show_on_uudp','=',True),('company_id','=',company_id)]"/>
+                            <field name="journal_entry_id" options='{"no_create": 1, "no_open": 1}' attrs="{'invisible': [('journal_entry_id','=',False)]}" groups="account.group_account_manager" readonly="1"/>
+                            <field name="company_id" attrs="{'readonly': ['|','&amp;',('state','=','confirm'),('is_user_pencairan','!=', True),('state','=','done')]}" options='{"no_create": 1, "no_open": 1}'/>
+                            <field name="pencairan_id" readonly="1" attrs="{'invisible':['|',('pencairan_id','=',False)]}"/>
+                            <field name="tgl_pencairan" readonly="1" attrs="{'invisible': [('pencairan_id','=',False)]}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="detail" string="Detail">
+                            <field name="uudp_ids" mode="tree" required="1" attrs="{'readonly': ['|','&amp;',('state','=','confirm'),('is_user_pencairan','!=', True),('state','=','done')]}">
+                                <tree editable="bottom">
+                                    <field name="product_id" options='{"no_create": 1, "no_open": 1}' domain="[('can_be_expensed','=',True),('uudp','=',False)]" />
+                                    <field name="coa_debit"  options='{"no_create": 1, "no_open": 1}' groups="account.group_account_manager" string="Account" domain="[('company_id','=',parent.company_id)]"/>
+                                    <field name="description" />
+                                    <field name="qty" sum="Total Amount" />
+                                    <field name="uom" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                    <field name="unit_price" />
+                                    <field name="partner_id" options='{"no_create": 1, "no_open": 1}'/>
+                                    <field name="store_id" options='{"no_create": 1, "no_open": 1}' domain="[('account_analytic_tag_id','!=',False)]"/>
+                                    <field name="sub_total" sum="Total Amount"/>
+                                    <field name="total" invisible="1"/>
+                                    <field name="state" invisible="1"/>
+                                </tree>
+                            </field>
+                            <group>
+                                <group>
+<!--                                      <field name="difference" attrs="{'invisible':[('type','!=','penyelesaian')], 'readonly':[('state','=','done')],'required':[('type','=','penyelesaian'),('sisa_penyelesaian','!=',0.0)]}" domain="[('company_id','=',company_id)]" options='{"no_create": 1, "no_open": 1, "no_open": 1}' string="Difference Account" invisible="0"/>
+                                    <field name="difference_notes" attrs="{'invisible':[('type','!=','penyelesaian')], 'readonly':[('state','=','done')],'required':[('difference','!=',False)]}" invisible="0"/> -->
+                                </group>
+                                <group class="oe_subtotal_footer oe_right">
+                                    <field name="sisa_penyelesaian" attrs="{'invisible':[('type','!=','penyelesaian')]}"/>
+                                </group>
+                            </group>
+                        </page>                       
+                        <page string="Information" groups="account.group_account_manager">
+                            <group>
+                                <group>
+                                    <field name="by_pass_selisih" attrs="{'readonly':[('state','=','done')]}" invisible="1"/>
+                                    <field name="coa_kredit" attrs="{'invisible':[('type','=','pengajuan')], 'required':[('state','=','confirm_finance'),('type','=','penyelesaian')], 'readonly':[('state','=','done')]}" options='{"no_create": 1, "no_open": 1, "no_open": 1}' domain="[('company_id','=',company_id)]"/>
+                                </group>
+                            </group>
+                        </page>                        
+                    </notebook>
+                    <separator string="Notes"/>
+                    <field name="notes" required="1" attrs="{'readonly': ['|','&amp;',('state','=','confirm'),('is_user_pencairan','!=', True),('state','=','done')]}"/>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+            </field>
+        </record>
+
+        <record id="view_uudp_pencairan_tree" model="ir.ui.view">
+            <field name="name">uudp.pencairan.tree</field>
+            <field name="model">uudp.pencairan</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="UUDP Pencairan List">
+                    <field name="name"/>
+                    <field name="journal_id"/>
+                    <field name="company_id"/>
+                    <field name="tgl_pencairan"/>
+                    <field name="total_pencairan" sum="Total Amount"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+       <record id="wizard_pencairan_view" model="ir.ui.view">
+           <field name="name">pencairan.wizard.view</field>
+           <field name="model">pencairan.wizard</field>
+           <field name="arch" type="xml">
+               <form string="Wizard Pencairan" version="7.0">
+                    <group name="pencairan_wizard" >
+                        <group>
+                             <field name="uudp_pencairan_id" invisible="1"/>
+                             <field name="date"/>
+                             <field name="nominal"/>
+                             <field name="notes" placeholder="Label pada sisi kredit"/>
+                        </group>
+                        <group>
+                            <field name="company_id" invisible="1"/>
+                            <field name="debit_account_id" options='{"no_create": 1, "no_open": 1}' domain="[('company_id','=',company_id)]"/>
+                            <field name="debit_account_notes"  placeholder="Label pada sisi debit"/>
+                            </group>
+                    </group>
+                    <footer>
+                        <button type="special"
+                                class="btn btn-default"
+                                special="cancel"
+                                string="Cancel"
+                                icon="fa-times"/>
+
+                        <button type="object"
+                                class="btn btn-primary"
+                                string="OK"
+                                name="action_pencairan"
+                                icon="fa-check-circle"/>
+                    </footer>
+               </form>
+           </field>
+       </record>
+
+       <record id="open_wizard_action_id" model="ir.actions.act_window">
+           <field name="name">Masukan Nominal Pencairan</field>
+           <field name="type">ir.actions.act_window</field>
+           <field name="res_model">pencairan.wizard</field>
+           <field name="view_type">form</field>
+           <field name="view_mode">form</field>
+           <field name="target">new</field>
+       </record>
+
+        <record id="view_uudp_pencairan_form" model="ir.ui.view">
+            <field name="name">uudp.pencairan.form</field>
+            <field name="model">uudp.pencairan</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <form string="UUDP Pencairan Form" create="false">
+                <header>
+                    <button name="button_confirm" 
+                            states="draft" 
+                            string="Confirm" 
+                            type="object" 
+                            class="oe_highlight"
+                            groups="vit_uudp.group_user_uudp_pencairan"/>
+
+                    <button name="button_done_once" 
+                            states="confirm_once" 
+                            string="Done" 
+                            type="object"
+                            class="oe_highlight"
+                            groups="vit_uudp.group_manager_uudp_pencairan"/>
+
+                    <button name="button_done_parsial" 
+                            states="confirm_parsial" 
+                            string="Done" 
+                            type="object" 
+                            class="oe_highlight"
+
+                            groups="vit_uudp.group_manager_uudp_pencairan"/>
+
+                    <button name="%(open_wizard_action_id)d" 
+                            type="action" 
+                            states="confirm_parsial"  
+                            string="Proses Pencairan" 
+                            class="oe_highlight"
+                            groups="vit_uudp.group_manager_uudp_pencairan"/>
+
+                    <button name="button_cancel" 
+                            confirm="Anda yakin data akan di cancel ?"
+                            states="confirm_once,confirm_parsial" 
+                            string="Cancel" 
+                            type="object"
+                            groups="vit_uudp.group_manager_uudp_pencairan"/>
+
+                    <button name="button_refuse" 
+                            confirm="Anda yakin data akan di refuse ?"
+                            states="confirm_once,confirm_parsial" 
+                            string="Refuse" 
+                            type="object"
+                            groups="vit_uudp.group_manager_uudp_pencairan" invisible="1"/>
+
+                    <button name="button_set_to_draft" 
+                            states="cancel" 
+                            string="Set to Draft" 
+                            type="object"
+                            class="oe_highlight"
+                            groups="vit_uudp.group_manager_uudp_pencairan"/>
+
+                    <button name="button_force_cancel"
+                            attrs="{'invisible' : ['|',('state','!=','done'),('type','!=','parsial')]}"
+                            string="Force Cancel"
+                            type="object"
+                            groups="vit_uudp.group_force_cancel_pencairan"/>
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm,done" statusbar_colors='{"draft":"red","confirm":"blue"}' readonly="1"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Nomor Pencairan" />
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="tgl_pencairan" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="type" invisible="1"/>
+                            <field name="ajuan_id" attrs="{'invisible': [('type','!=','parsial')], 'required': [('type','=','parsial')], 'readonly': [('state','!=','draft')]}" options='{"no_create": 1, "no_open": 1}' domain="[('company_id','=',company_id),('type','in',('pengajuan','reimberse')),('state','in',('confirm_finance','confirm_accounting')),('type_pencairan','=',False)]"/>
+                            <field name="nominal_ajuan" attrs="{'invisible': [('type','!=','parsial')]}" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="sisa_pencairan_parsial" invisible="1"/>
+                            <field name="user_id" invisible="1"/>
+                            <field name="journal_id" attrs="{'readonly': [('state','!=','draft')]}" options='{"no_create": 1, "no_open": 1}' domain="[('show_on_uudp','=',True),('company_id','=',company_id)]"/>
+                            <field name="coa_kredit" attrs="{'readonly': [('state','in',('done','cancel','refuse'))]}" options='{"no_create": 1, "no_open": 1}' domain="[('company_id','=',company_id)]"/>
+                            <field name="journal_entry_id" options='{"no_create": 1, "no_open": 1}' attrs="{'invisible': [('journal_entry_id','=',False)], 'readonly': [('state','!=','draft')]}"/>
+                            <field name="company_id" required="1" options='{"no_create": 1, "no_open": 1, "no_open": 1}' attrs="{'readonly': [('state','!=','draft')]}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Pengajuan" attrs="{'invisible': [('type','!=','once')]}">
+                            <field name="uudp_ids" attrs="{'readonly': [('state','in',('done','cancel','refuse'))], 'required': [('type','=','once')]}" domain="[('company_id','=',company_id),('type','in',('pengajuan','reimberse')),('state','=','confirm_finance'),('pencairan_id','=',False)]">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="user_id"/>
+                                    <field name="department_id"/>
+                                    <field name="responsible_id"/>
+                                    <field name="total_ajuan" sum="Total Amount"/>
+                                    <field name="total_pencairan" sum="Total Amount"/>
+                                    <field name="tgl_pencairan" />
+                                    <field name="state"/>
+                                    <field name="cara_bayar"/>
+                                    <field name="bank_id"/>
+                                    <field name="no_rekening"/>
+                                    <field name="atas_nama"/>
+                                    <field name="company_id"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="Journal Entries" attrs="{'invisible': [('type','!=','parsial')]}">
+                            <field name="journal_entry_ids">
+                                <tree editable="bottom" create="0" delete="0">
+                                    <field name="date"/>
+                                    <field name="name"/>
+                                    <field name="partner_id"/>
+                                    <field name="ref"/>
+                                    <field name="journal_id"/>
+                                    <field name="amount" sum="Total Amount"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>                                                
+                    </notebook>
+                    <separator string="Notes"/>
+                    <field name="notes" required="0"/>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+            </field>
+        </record>
+
+        <record id="pencairan_batches_form" model="ir.ui.view">
+            <field name="name">pencairan.batches.form</field>
+            <field name="model">pencairan.batches</field>
+            <field name="arch" type="xml">
+                <form string="Pencairan Batches">
+                <header>
+                    <button string="Confirm" name="button_confirm" type="object" states="draft" groups="vit_uudp.group_user_uudp_pencairan,vit_uudp.group_manager_uudp_pencairan"/>
+                    <button string="Done" name="button_done" type="object" states="confirm" groups="vit_uudp.group_user_uudp_pencairan,vit_uudp.group_manager_uudp_pencairan"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <label for="name" class="oe_edit_only"/>
+                    <h1>
+                        <field name="name" attrs="{'readonly': [('state','!=','draft')]}"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="date_planned" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <label for="start_date" string="Period"/>
+                             <div>
+                                   <field name="start_date" class="oe_inline" placeholder="Start Date" attrs="{'readonly': [('state','!=','draft')]}"/>-<field name="end_date" class="oe_inline" placeholder="End Date" attrs="{'readonly': [('state','!=','draft')]}"/>
+                             </div>
+                        </group>
+                        <group>
+                             <field name="bank_id" domain="[('type','in',('bank','cash')),('company_id','=',company_id)]" attrs="{'readonly': [('state','!=','draft')]}" options='{"no_create": 1, "no_open": 1}'/>
+                             <field name="company_id" attrs="{'readonly': [('state','!=','draft')]}" invisible="1" options='{"no_create": 1, "no_open": 1}'/>
+                        </group>
+                    </group>
+                    <separator string="Pencairan"/>
+                        <button name="add_pencairan"
+                                string="Add Pencairan"
+                                type="object" 
+                                states="draft"
+                                class="oe_stat_button" icon="fa-plus-square"
+                                />
+                    <field name="pencairan_ids" attrs="{'readonly': [('state','!=','draft')]}" domain="[('type','=','once'),('state','=','confirm_once'),('company_id','=',company_id)]" options='{"no_create": 1}'/>
+                </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="pencairan_batches_tree" model="ir.ui.view">
+            <field name="name">pencairan.batches.tree</field>
+            <field name="model">pencairan.batches</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Pencairan Batches">
+                    <field name="name"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="bank_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="uudp_search" model="ir.ui.view">
+            <field name="name">uudp.search</field>
+            <field name="model">uudp</field>
+            <field name="type">search</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="UUDP">
+                    <field name="name" string="Code"/>
+                    <field name="user_id" string="Employee" />
+                    <field name="responsible_id" string="Responsible"/>
+                    <field name="journal_id" string="Journal"/>
+                    <field name="notes" string="Notes"/>
+                    <field name="date" string="Date"/>
+                    <field name="pencairan_id" string="Pencairan"/>
+                    <field name="penyelesaian_id" string="Penyelesaian"/>
+                    <filter string="Sudah Pencairan"
+                                name="sudah_pencairan"
+                                domain="[('pencairan_id','!=',False)]" 
+                                context="{}"/>
+                    <filter string="Belum Pencairan"
+                                name="belum_pencairan"
+                                domain="[('pencairan_id','=',False)]" 
+                                context="{}"/>
+                    <filter string="Sudah Penyelesaian"
+                                name="sudah_penyelesaian"
+                                domain="[('penyelesaian_id','!=',False)]" 
+                                context="{}"/>
+                    <filter string="Belum Penyelesaian" 
+                                name="belum_penyelesaian"
+                                domain="[('penyelesaian_id','=',False)]" 
+                                context="{}"/>
+                    <filter string="Pencairan Parsial"
+                                name="pencairan_parsial"
+                                domain="[('type_pencairan','=','parsial')]" 
+                                context="{}"/>
+                    <filter string="Pencairan Once"
+                                name="pencairan_once"
+                                domain="[('type_pencairan','=','once')]" 
+                                context="{}"/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Pencairan"
+                                name="pencairan"
+                                domain="[]" 
+                                context="{'group_by':'pencairan_id'}"/>
+                        <filter string="Tgl Pencairan"
+                                name="tgl_pencairan"
+                                domain="[]" 
+                                context="{'group_by':'tgl_pencairan'}"/>
+                        <filter string="Type Pencairan"
+                                name="type_pencairan"
+                                domain="[]" 
+                                context="{'group_by':'type_pencairan'}"/>
+                        <filter string="Penyelesaian" 
+                                name="penyelesaian"
+                                domain="[]" 
+                                context="{'group_by':'penyelesaian_id'}"/>
+                        <filter string="Tgl Penyelesaian"
+                                name="tgl_penyelesaian"
+                                domain="[]" 
+                                context="{'group_by':'tgl_penyelesaian'}"/>
+                        <filter string="Employee" 
+                                name="employee"
+                                domain="[]" 
+                                context="{'group_by':'user_id'}"/>
+                        <filter string="Responsible"
+                                name="responsible_id"
+                                domain="[]" 
+                                context="{'group_by':'responsible_id'}"/>
+                        <filter string="Department" 
+                                name="department_id"
+                                domain="[]" 
+                                context="{'group_by':'department_id'}"/>
+                        <filter string="State"
+                                name="state"
+                                domain="[]" 
+                                context="{'group_by':'state'}"/>
+                        <filter string="Journal"
+                                name="journal_id"
+                                domain="[]" 
+                                context="{'group_by':'journal_id'}"/>
+                        <filter string="Company" 
+                                name="company_id"
+                                domain="[]" 
+                                context="{'group_by':'company_id'}"/>
+                    </group>
+                </search>
+             </field>
+         </record>
+
+        <record id="view_uudp_pencairan_search" model="ir.ui.view">
+            <field name="name">uudp.pencairan.search</field>
+            <field name="model">uudp.pencairan</field>
+            <field name="type">search</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="UUDP Pencairan">
+                    <field name="name" select="True"/>
+                    <field name="ajuan_id" />
+                    <field name="tgl_pencairan" select="True"/>
+                    <field name="state" select="True"/>
+                    <field name="journal_id" string="Journal" select="True"/>
+                    <group expand="0" string="Group By...">
+                        <filter string="State"
+                                name="state"
+                                domain="[]" 
+                                context="{'group_by':'state'}"/>
+                        <filter string="Journal"
+                                name="journal_id"
+                                domain="[]" 
+                                context="{'group_by':'journal_id'}"/>
+                        <filter string="Company"
+                                name="company_id"
+                                domain="[]" 
+                                context="{'group_by':'company_id'}"/>
+                    </group>
+
+                </search>
+            </field>
+        </record>
+
+        <record id="action_uudp_pengajuan_list" model="ir.actions.act_window">
+            <field name="name">UUDP Pengajuan</field>
+            <field name="res_model">uudp</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field eval="False" name="view_id"/>
+            <field name="domain">[('type','=','pengajuan')]</field>
+            <field name="context">{'default_type':'pengajuan'}</field> 
+            <field name="search_view_id" ref="uudp_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add an UUDP Pengajuan
+              </p><p>
+                klik tombol create untuk menambahkan UUDP pengajuan
+              </p>
+            </field>
+        </record>
+
+        <record id="action_pengajuan_tree1_view1" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_uudp_tree"/>
+            <field name="act_window_id" ref="action_uudp_pengajuan_list"/>
+        </record>
+
+        <record id="action_pengajuan_tree1_view2" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_uudp_pengajuan_form"/>
+            <field name="act_window_id" ref="action_uudp_pengajuan_list"/>
+        </record>
+
+        <record id="action_uudp_reimberse_list" model="ir.actions.act_window">
+            <field name="name">UUDP Reimburse</field>
+            <field name="res_model">uudp</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field eval="False" name="view_id"/>
+            <field name="domain">[('type','=','reimberse')]</field>
+            <field name="context">{'default_type':'reimberse'}</field> 
+            <field name="search_view_id" ref="uudp_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add an UUDP Reimburse
+              </p><p>
+                Klik tombol create untuk menambahkan UUDP Reimburse
+              </p>
+            </field>
+        </record>
+
+        <record id="action_reimberse_tree1_view1" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_uudp_reimburse_tree"/>
+            <field name="act_window_id" ref="action_uudp_reimberse_list"/>
+        </record>
+
+        <record id="action_reimberse_tree1_view2" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_uudp_penyelesaian_form"/>
+            <field name="act_window_id" ref="action_uudp_reimberse_list"/>
+        </record>
+
+        <record id="action_uudp_penyelesaian_list" model="ir.actions.act_window">
+            <field name="name">UUDP Penyelesaian</field>
+            <field name="res_model">uudp</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field eval="False" name="view_id"/>
+            <field name="domain">[('type','=','penyelesaian')]</field>
+            <field name="context">{'default_type':'penyelesaian'}</field> 
+            <field name="search_view_id" ref="uudp_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add an UUDP penyelesaian
+              </p><p>
+                klik tombol create untuk menambahkan UUDP penyelesaian
+              </p>
+            </field>
+        </record>
+
+        <record id="action_penyelesaian_tree1_view1" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_uudp_tree"/>
+            <field name="act_window_id" ref="action_uudp_penyelesaian_list"/>
+        </record>
+
+        <record id="action_penyelesaian_tree1_view2" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_uudp_penyelesaian_form"/>
+            <field name="act_window_id" ref="action_uudp_penyelesaian_list"/>
+        </record>
+
+        <record id="action_uudp_pencairan_once" model="ir.actions.act_window">
+            <field name="name">UUDP Pencairan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">uudp.pencairan</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_uudp_pencairan_search"/>
+            <field name="domain">[('type','=','once')]</field>
+            <field name="context">{'default_type':'once'}</field> 
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add an UUDP pencairan
+                </p>
+            <p>klik tombol create untuk menambahkan UUDP pencairan</p>
+            </field>
+        </record>
+
+        <record id="action_uudp_pencairan_parsial" model="ir.actions.act_window">
+            <field name="name">UUDP Pencairan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">uudp.pencairan</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('type','=','parsial')]</field>
+            <field name="context">{'default_type':'parsial'}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add an UUDP pencairan
+                </p>
+            <p>klik tombol create untuk menambahkan UUDP pencairan</p>
+            </field>
+        </record>        
+
+        <record id="action_uudp_pencairan_batches" model="ir.actions.act_window">
+            <field name="name">Pencairan Batches</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">pencairan.batches</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add an UUDP pencairan batches
+                </p>
+            <p>klik tombol create untuk menambahkan UUDP pencairan Batches</p>
+            </field>
+        </record>
+
+        <record id="action_product_uudp_list" model="ir.actions.act_window">
+            <field name="name">Products</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.template</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('can_be_expensed','=',1)]</field>
+            <field name="context">{"search_default_can_be_expensed":1}</field>
+            <field name="search_view_id" ref="product.product_template_search_view"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to define a new product.
+                </p>
+            </field>
+        </record>
+
+        <record id="action_uudp_line_list" model="ir.actions.act_window">
+            <field name="name">UUDP Line</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">uudp.detail</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    ...........................
+                </p>
+            </field>
+        </record>
+
+
+        <menuitem id="uudp_home"
+                name="Pengajuan Biaya"
+                sequence="50"
+                groups="vit_uudp.group_user_uudp_user"
+                web_icon="vit_uudp,static/description/icon.png"/>
+
+        <menuitem id="uudp_menu"
+                name="UUDP"
+                parent="uudp_home"
+                sequence="1"
+                groups="vit_uudp.group_user_uudp_user"/>
+
+        <menuitem id="uudp_pengajuan"
+                name="Pengajuan"
+                parent="uudp_menu"
+                action="action_uudp_pengajuan_list"
+                sequence="1"
+                groups="vit_uudp.group_user_uudp_user"/>
+
+        <menuitem id="sub_uudp_pengajuan"
+                name="Pengajuan"
+                parent="uudp_pengajuan"
+                action="action_uudp_pengajuan_list"
+                sequence="1"
+                groups="vit_uudp.group_user_uudp_user"/>
+
+        <menuitem id="uudp_pencairan_menu"
+                name="Pencairan"
+                parent="uudp_menu"
+                sequence="2"
+                groups="vit_uudp.group_user_uudp_pencairan,vit_uudp.group_manager_uudp_pencairan"/>
+
+        <menuitem id="uudp_pencairan_parsial"
+                name="Parsial"
+                parent="uudp_pencairan_menu"
+                action="action_uudp_pencairan_parsial"
+                sequence="10"
+                groups="vit_uudp.group_user_uudp_pencairan,vit_uudp.group_manager_uudp_pencairan"/>
+
+        <menuitem id="uudp_pencairan_once"
+                name="At Once"
+                parent="uudp_pencairan_menu"
+                action="action_uudp_pencairan_once"
+                sequence="20"
+                groups="vit_uudp.group_user_uudp_pencairan,vit_uudp.group_manager_uudp_pencairan"/>
+
+        <menuitem id="uudp_pencairan_batches"
+                name="Batches"
+                parent="uudp_pencairan_menu"
+                action="action_uudp_pencairan_batches"
+                sequence="30"
+                groups="vit_uudp.group_user_uudp_pencairan,vit_uudp.group_manager_uudp_pencairan"/>
+
+        <menuitem id="uudp_penyelesaian"
+                name="Penyelesaian"
+                parent="uudp_menu"
+                action="action_uudp_penyelesaian_list"
+                sequence="3"
+                groups="vit_uudp.group_user_uudp_user"/>
+
+        <menuitem id="sub_uudp_penyelesaian"
+                name="Penyelesaian"
+                parent="uudp_penyelesaian"
+                action="action_uudp_penyelesaian_list"
+                sequence="3"
+                groups="vit_uudp.group_user_uudp_user"/>
+
+        <menuitem id="uudp_reimberse"
+                name="Reimburse"
+                parent="uudp_home"
+                action="action_uudp_reimberse_list"
+                sequence="4"
+                groups="vit_uudp.group_user_uudp_user"/>
+
+<!--         <menuitem id="uudp_line"
+                name="UUDP Line"
+                parent="uudp_home"
+                action="action_uudp_line_list"
+                sequence="5"
+                groups=""/> -->
+
+        <menuitem id="uudp_product"
+                name="Products"
+                parent="uudp_home"
+                action="action_product_uudp_list"
+                sequence="5"
+                groups="vit_uudp.group_user_uudp_pencairan,vit_uudp.group_manager_uudp_pencairan"/>
+
+        <record id="view_uudp_journal_entry" model="ir.ui.view">
+            <field name="name">account.move.tree.uudp</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_tree"/>
+            <field name="arch" type="xml">
+                <field name="state" position="before">
+                    <field name="narration" />
+                </field>
+            </field>
+        </record>
+
+
+</odoo>

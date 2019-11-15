@@ -1,0 +1,52 @@
+Searching 22 files for "fields.Date"
+
+/Users/macbookpro/git/kisel_dev/vit_uudp/models/pencairan_batches.py:
+   11  
+   12      name = fields.Char(string="Name", required=True, track_visibility='onchange')
+   13:     start_date = fields.Date(string="Start Date", track_visibility='onchange')
+   14:     end_date = fields.Date(string="End Date", track_visibility='onchange')
+   15      state = fields.Selection([('draft', 'Draft'),
+   16                                ('confirm', 'Waiting Approval'),
+   17                                ('done', 'Done'),], default='draft', required=True, index=True, track_visibility='onchange',)
+   18:     date_planned = fields.Date(string="Tanggal Rencana Bayar", track_visibility='onchange', required=True)
+   19      bank_id = fields.Many2one("account.journal", string="Bank", track_visibility='onchange', required=True)
+   20      pencairan_ids = fields.Many2many("uudp.pencairan", string="Pencairans", track_visibility='onchange',)
+
+/Users/macbookpro/git/kisel_dev/vit_uudp/models/uudp.py:
+  218      type_pencairan = fields.Selection([('once', 'Once'), 
+  219                                         ('parsial', 'Parsial'),],string='Type Pencairan')
+  220:     date = fields.Date(string="Required Date", required=True, default=fields.Date.context_today, track_visibility='onchange',)
+  221      terbilang = fields.Char(string='Terbilang', translate=True, readonly=True, states={'draft': [('readonly', False)]})
+  222      is_user_pencairan = fields.Boolean(compute="check_validity")
+  223      pencairan_id = fields.Many2one("uudp.pencairan","Pencairan")
+  224:     tgl_pencairan = fields.Date("Tanggal Pencairan",)# related="pencairan_id.tgl_pencairan", store=True)
+  225      sisa_penyelesaian = fields.Float("Sisa Penyelesaian", compute="_get_sisa_penyelesaian", store=True)
+  226:     end_date = fields.Date(string="End Date",  track_visibility='onchange',)
+  227      by_pass_selisih = fields.Boolean("By Pass Different Amount",  track_visibility='onchange')
+  228      selesai_id = fields.Many2one('uudp','Selesai ID',compute="search_input_penyelesaian")
+  229      penyelesaian_id = fields.Many2one('uudp','Penyelesaian')# store ke db
+  230:     tgl_penyelesaian = fields.Date("Tgl Penyelesaian")
+  231  
+  232      @api.depends('uudp_ids.qty','uudp_ids.unit_price','uudp_ids.sub_total')
+
+/Users/macbookpro/git/kisel_dev/vit_uudp/models/uudp_pencairan.py:
+   53  
+   54      name = fields.Char(string="Nomor Pencairan", readonly=True, default="New")
+   55:     tgl_pencairan = fields.Date(string="Tanggal Pencairan", required=True, default=fields.Date.context_today, track_visibility='onchange',)
+   56      user_id = fields.Many2one("res.users", string="User", default=lambda self: self.env.user)
+   57      uudp_ids = fields.Many2many("uudp", string="Detail Ajuan", domain="[('state','=','confirm_finance'),('type','=','pengajuan')]", track_visibility='onchange',)
+
+/Users/macbookpro/git/kisel_dev/vit_uudp/wizard/pencairan.py:
+   27  	debit_account_notes = fields.Text("Notes", help="Label pada account move line bank/credit")
+   28  	company_id = fields.Many2one("res.company", string="Company",default=_get_active_company)
+   29: 	date = fields.Date(string="Tanggal Pencairan", required=True, default=fields.Datetime.now)
+   30  	notes = fields.Text("Notes", help="Label pada account move line bank/credit")
+   31  
+   ..
+  120  		return False
+  121  
+  122: 	date = fields.Date("Date",default=_get_default_date)
+  123  
+  124  EditAjuanWizard()
+
+13 matches across 4 files
