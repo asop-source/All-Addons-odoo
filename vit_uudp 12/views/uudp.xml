@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
         <record id="vit_journal_uudp" model="ir.ui.view">
             <field name="name">account.journal.uudp.form</field>
             <field name="model">account.journal</field>
@@ -64,6 +63,8 @@
                     <field name="no_rekening"/>
                     <field name="notes"/>
                     <field name="company_id"/>
+                    <field name="location_id"/>
+                    <field name="business_id"/>
                 </tree>
             </field>
         </record>        
@@ -93,6 +94,8 @@
                     <field name="coa_kredit"/>
                     <field name="notes"/>
                     <field name="company_id"/>
+                    <field name="location_id"/>
+                    <field name="business_id"/>
                 </tree>
             </field>
         </record>
@@ -238,6 +241,10 @@
                             <field name="atas_nama" attrs="{'readonly': [('state','in',('done','cancel','refuse'))], 'invisible': [('cara_bayar','!=','transfer')], 'required': [('cara_bayar','=','transfer'),('state','=','draft'),('type','!=','penyelesaian')]}"/>
                             <field name="need_driver" attrs="{'readonly': [('state','!=','draft')],'invisible': [('type','!=','pengajuan')]}"/>
                             <field name="company_id" attrs="{'readonly': [('state','!=','draft')]}" options='{"no_create": 1, "no_open": 1, "no_open": 1}'/>
+
+                            <field name="location_id" attrs="{'readonly': [('state','!=','draft')]}" options='{"no_create": 1, "no_open": 1, "no_open": 1}'/>
+                            <field name="business_id" attrs="{'readonly': [('state','!=','draft')]}" options='{"no_create": 1, "no_open": 1, "no_open": 1}'/>
+
                             <field name="selesai" invisible="1"/>
                             <field name="pencairan_id" readonly="1" attrs="{'invisible': [('pencairan_id','=',False)]}"/>
                             <field name="tgl_pencairan" attrs="{'invisible': [('pencairan_id','=',False)],'readonly': [('state','in',('done','cancel','refuse'))]}" />
