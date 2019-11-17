@@ -1,6 +1,5 @@
 <odoo>
   <data>
-
     <record model="ir.ui.view" id="view_sales_status_form">
       <field name="name">view_sales_status.form</field>
       <field name="model">sale.order</field>
@@ -11,5 +10,6 @@
       </field>
       </field>
     </record>
+    
   </data>
 </odoo>
