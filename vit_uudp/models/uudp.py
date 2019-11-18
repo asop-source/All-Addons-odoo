@@ -1,7 +1,7 @@
 from odoo import api, fields, models, exceptions, _
 import datetime
 from odoo.exceptions import UserError, AccessError, ValidationError
-# from odoo.addons.terbilang import terbilang
+from odoo.addons.terbilang import terbilang
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -11,8 +11,6 @@ class uudp(models.Model):
     _order = 'name desc'
     _inherit = ['portal.mixin', 'mail.thread', 'mail.activity.mixin']
 
-    location_id = fields.Many2one("account.analytic.tag", string="Location")
-    business_id = fields.Many2one("account.analytic.tag", string="Business")
 
     #########################
     #Fungsi message discuss #

@@ -1,7 +1,7 @@
 from odoo import api, fields, models, _
 import datetime
 from odoo.exceptions import UserError, AccessError, ValidationError
-# from odoo.addons.terbilang import terbilang
+from odoo.addons.terbilang import terbilang
 
 
 class uudpPencairan(models.Model):

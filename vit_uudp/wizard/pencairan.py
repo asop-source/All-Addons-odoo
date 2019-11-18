@@ -1,7 +1,7 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, AccessError, ValidationError
 import datetime
-# from odoo.addons.terbilang import terbilang
+from odoo.addons.terbilang import terbilang
 
 class pencairanWizard(models.TransientModel):
 	_name = 'pencairan.wizard'

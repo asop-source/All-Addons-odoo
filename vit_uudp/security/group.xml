@@ -1,4 +1,4 @@
-<odoo>
+<openerp>
 	<data noupdate="1">
 
 		<record id="group_force_cancel_pencairan" model="res.groups">
@@ -89,4 +89,4 @@
 		</record>
 
 	</data>
-</odoo>
+</openerp>
