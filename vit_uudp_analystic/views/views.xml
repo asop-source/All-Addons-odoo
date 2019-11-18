@@ -1,0 +1,16 @@
+<odoo>
+  <data>
+       <record id="view_uudp_pengajuan_form" model="ir.ui.view">
+            <field name="name">uudp.pengajuan.form</field>
+            <field name="model">uudp</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="vit_uudp.view_uudp_pengajuan_form"/>
+            <field name="arch" type="xml">
+                <field name="company_id" position="after">
+                  <field name="location_id" attrs="{'readonly': [('state','!=','draft')]}" options='{"no_create": 1, "no_open": 1, "no_open": 1}'/>
+                  <field name="business_id" attrs="{'readonly': [('state','!=','draft')]}" options='{"no_create": 1, "no_open": 1, "no_open": 1}'/>
+                </field>   
+            </field>
+          </record>
+  </data>
+</odoo>
