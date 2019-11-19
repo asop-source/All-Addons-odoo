@@ -1,0 +1,9 @@
+<odoo>
+	<data>
+
+		<record id="user_uudp_hide_menu" model="res.groups">
+			<field name="name">UUDP Menu Hiden</field>
+		</record>
+
+	</data>
+</odoo>		
