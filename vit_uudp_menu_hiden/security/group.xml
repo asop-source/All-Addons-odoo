@@ -1,8 +1,16 @@
 <odoo>
 	<data>
 
-		<record id="user_uudp_hide_menu" model="res.groups">
-			<field name="name">UUDP Menu Hiden</field>
+		<record id="group_uudp_hiden_menu" model="res.groups">
+		    <field name="name">UUDP At Once / Batches</field>
+		</record>
+
+		<record model="ir.ui.menu" id="vit_uudp.uudp_pencairan_once">
+			   <field name="groups" eval="[(4,0,[ref('group_uudp_hiden_menu')])]"/>
+		</record>
+
+		<record model="ir.ui.menu" id="vit_uudp.uudp_pencairan_batches">
+			   <field name="groups" eval="[(4,0,[ref('group_uudp_hiden_menu')])]"/>
 		</record>
 
 	</data>

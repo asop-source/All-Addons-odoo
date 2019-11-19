@@ -4,11 +4,12 @@
 
     'summary': """
 
+    UUDP Menu At Once / Batches
 
     """,
 
     'description': """
-        Vit UUDP Hiden Menu
+        Vit UUDP Menu Hiden
     """,
 
     'author': "asopkarawang@gmail.com",
@@ -27,7 +28,7 @@
     'data': [
         # 'security/ir.model.access.csv',
         'security/group.xml',
-        'views/views.xml',
+        # 'views/views.xml',
         'views/templates.xml',
     ],
     # only loaded in demonstration mode

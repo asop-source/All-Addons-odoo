@@ -1,17 +1,20 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "analystic_tag",
+    'name': "UUDP Analytic",
 
-    'summary': """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+    'summary': 
+"""
+Location & Busines UUDP
+
+
+""",
 
     'description': """
-        Long description of module's purpose
+        Location & Busines UUDP
     """,
 
-    'author': "My Company",
-    'website': "http://www.yourcompany.com",
+    'author': "asopkarawang@gmail.com",
+    'website': "http://www.vitraining.com",
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/12.0/odoo/addons/base/data/ir_module_category_data.xml

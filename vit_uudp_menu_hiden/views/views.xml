@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <odoo>
+	<data>
 
-		<menuitem id="vit_uudp.uudp_pencairan_once"
-							name="At Once"
-							sequence="20"
-							groups="user_uudp_hide_menu"/>
 
-		<menuitem id="vit_uudp.uudp_pencairan_batches"
-							name="Batches"
-							sequence="30"
-							groups="user_uudp_hide_menu"/>
 
+
+
+
+
+
+		
+	</data>
 </odoo>
