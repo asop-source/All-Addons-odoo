@@ -14,6 +14,6 @@ class MrpProduction(models.Model):
 		lot_data = {
 			'name': res.name,
 			'product_id': res.product_id.id
-		 }
+		}
 		self.env['stock.production.lot'].create(lot_data)
 		return res
