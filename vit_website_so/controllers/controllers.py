@@ -11,24 +11,23 @@ class VitWebsiteSo(http.Controller):
 		return request.render("vit_website_so.index", {
 			'sale_orders': sale_orders
 			})
-		
 	# membuat ajax
 	@http.route('/vit/load_ajax',type='http' , auth='public', website=True)
 	def load_ajax(self, **kw):
-		return request.render("vit_website_so.index_ajax", {
-			})
+		return request.render("vit_website_so.index_ajax")
+	
 		sale_orders = request.env['sale.order'].search([])
-		result = {}
-		result ['data'] = []
+		# result = {}
+		# result ['data'] = []
 
-		for so in sale_orders:
-			result['data'].append([
-				so.name,
-				so.confirm_date,
-				so.partner_id,
-				so.user_id,
-				so.amount_total,
-				so.invoice_status,
-			])
+		# for so in sale_orders:
+		# 	result['data'].append([
+		# 		so.name,
+		# 		so.confirm_date,
+		# 		so.partner_id,
+		# 		so.user_id,
+		# 		so.amount_total,
+		# 		so.invoice_status,
+		# 	])
 
-		return simplejson.dumps(result)
+		# return simplejson.dumps(result)
