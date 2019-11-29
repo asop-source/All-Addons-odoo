@@ -1,0 +1,36 @@
+<odoo>
+    <data>
+        <template id="index">
+            <t t-call="website.layout">
+                <h3>Sales Order </h3>
+                <table id="data_table" class="table">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Order Number</th>
+                            <th>Order Date</th>
+                            <th>Customer</th>
+                            <th>Sales person</th>
+                            <th>Total</th>
+                            <th>Invoice status</th>
+                       </tr>
+                     </thead>
+                    <tbody>
+                        <tr t-foreach="sale_orders" t-as="so">
+                            <td><span t-field="so.name"/></td>
+                            <td><span t-field="so.confirmation_date"/></td>
+                            <td><span t-field="so.partner_id"/></td>
+                            <td><span t-field="so.user_id"/></td>
+                            <td><span t-field="so.amount_total"/></td>
+                            <td><span t-field="so.invoice_status"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <script>
+                    $(document).ready(function(){
+                        $("#data_table").DataTable();
+                    })
+                </script>
+            </t>
+        </template>
+    </data>
+</odoo>

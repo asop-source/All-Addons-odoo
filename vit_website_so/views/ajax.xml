@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+
+        <template id="index_ajax">
+            <t t-call="website.layout">
+                <h3>Sales Order Via Ajax </h3>
+                <table id="ajax_data_table" class="table thead-light">
+                    <thead>
+                        <tr>
+                            <th>Order Number</th>
+                            <th>Order Date</th>
+                            <th>Customer</th>
+                            <th>Sales person</th>
+                            <th>Total</th>
+                            <th>Invoice status</th>
+                       </tr>
+                     </thead>
+                </table>
+                <script>
+                    $(document).ready(function(){
+                        $("#ajax_data_table").DataTable({
+                        'ajax' : '/vit/load_ajax'
+                        });
+                    })
+                </script>
+            </t>
+        </template>
+
+    </data>
+</odoo>

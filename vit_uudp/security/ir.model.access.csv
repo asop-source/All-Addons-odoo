@@ -1,5 +1,0 @@
-"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
-"access_uudp","access_uudp","vit_uudp.model_uudp","",1,1,1,1
-"access_uudp_pencairan","access_uudp_pencairan","vit_uudp.model_uudp_pencairan","",1,1,1,1
-"access_uudp_detail","access_uudp_detail","vit_uudp.model_uudp_detail","",1,1,1,1
-"access_pencairan_batches","access_pencairan_batches","vit_uudp.model_pencairan_batches","",1,1,1,1
