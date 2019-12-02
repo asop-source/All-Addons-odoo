@@ -16,13 +16,13 @@
                        </tr>
                      </thead>
                 </table>
-              <!--   <script>
+                <script>
                     $(document).ready(function(){
                         $("#ajax_data_table").DataTable({
-                        'ajax' : '/vit/load_ajax'
+                        "ajax" : "/vit/load_ajax"
                         });
                     })
-                </script> -->
+                </script>
             </t>
         </template>
 
