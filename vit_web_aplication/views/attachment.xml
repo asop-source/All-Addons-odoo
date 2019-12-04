@@ -1,0 +1,42 @@
+<odoo>
+    <data>
+        <template id="index_attachment">
+            <t t-call="website.layout">
+                <h3>Resumes and Letters </h3>
+                <table id="data_table" class="table">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Name</th>
+                            <th>File Name</th>
+                            <th>Resource Model</th>
+                            <th>Resource File</th>
+                            <th>Resource ID</th>
+                            <th>Type</th>
+                            <th>Created By</th>
+                            <th>Created On</th>
+                       </tr>
+                     </thead>
+                   <!--  <tbody>
+                        <tr t-foreach="ir_attachment" t-as="so">
+                            <td><span t-field="so.name"/></td>
+                            <td><span t-field="so.datas"/></td>
+                            <td><span t-field="so.res_model"/></td>
+                            <td><span t-field="so.res_field"/></td>
+                            <td><span t-field="so.res_id"/></td>
+                            <td><span t-field="so.type"/></td>
+                            <td><span t-field="so.create_uid"/></td>
+                            <td><span t-field="so.create_date"/></td>
+                        </tr>
+                    </tbody> -->
+                </table>
+                <script>
+                    $(document).ready(function(){
+                        $("#data_table").DataTable({
+                        "ajax" : "/vit/ir_ajax"
+                        });
+                    });
+                </script>
+            </t>
+        </template>
+    </data>
+</odoo>

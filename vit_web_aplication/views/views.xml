@@ -1,0 +1,33 @@
+<odoo>
+    <data>
+        <template id="index">
+            <t t-call="website.layout">
+                <h3>HR Aplicationt </h3>
+                <table id="data_table" class="table">
+                    <thead class ="thead-light">
+                        <tr>
+                            <th>Create date</th>
+                            <th>Subject / Aplication</th>
+                            <th>Aplication Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Applied job</th>
+                            <th>Stage</th>
+                            <th>Medium</th>
+                            <th>Source</th>
+                            <th>Appreciation</th>
+                            <th>Responsible</th>
+                       </tr>
+                     </thead>
+                </table>
+                <script>
+                    $(document).ready(function(){
+                        $("#data_table").DataTable({
+                        "ajax" : "/vit/web_ajax"
+                        });
+                    })
+                </script>
+            </t>
+        </template>
+    </data>
+</odoo>

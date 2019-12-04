@@ -1,0 +1,38 @@
+id,report_id:id,name,description,expression,sequence,style_id:id,type,accumulation_method,auto_expand_accounts,auto_expand_accounts_style_id:id
+vit_mis_kpi1000,vit_profit_and_balance.vit_mis_report2,revenue,Revenue,AccountingNone,1,vit_mis_kisel.vit_style_1,num,none,FALSE,FALSE
+vit_mis_kpi1001,vit_profit_and_balance.vit_mis_report2,service_participants,Service,AccountingNone,2,vit_mis_kisel.vit_style_2,num,none,FALSE,FALSE
+vit_mis_kpi1002,vit_profit_and_balance.vit_mis_report2,sales_channel,Sales,AccountingNone,3,vit_mis_kisel.vit_style_2,num,none,FALSE,FALSE
+vit_mis_kpi1003,vit_profit_and_balance.vit_mis_report2,general_service,General,AccountingNone,4,vit_mis_kisel.vit_style_2,num,none,FALSE,FALSE
+vit_mis_kpi1004,vit_profit_and_balance.vit_mis_report2,telco_infra_structure,Telco,AccountingNone,5,vit_mis_kisel.vit_style_2,num,none,FALSE,FALSE
+vit_mis_kpi1005,vit_profit_and_balance.vit_mis_report2,packaging,Packaging,AccountingNone,6,vit_mis_kisel.vit_style_2,num,none,FALSE,FALSE
+vit_mis_kpi1006,vit_profit_and_balance.vit_mis_report2,default,Default,AccountingNone,7,vit_mis_kisel.vit_style_2,num,none,FALSE,FALSE
+vit_mis_kpi1007,vit_profit_and_balance.vit_mis_report2,total_revenue,Total,AccountingNone,8,vit_mis_kisel.vit_style_5,num,none,FALSE,FALSE
+vit_mis_kpi1008,vit_profit_and_balance.vit_mis_report2,cogs,COGS,AccountingNone,9,vit_mis_kisel.vit_style_1,num,none,FALSE,FALSE
+vit_mis_kpi1009,vit_profit_and_balance.vit_mis_report2,cogs_service_participants,Service,AccountingNone,10,vit_mis_kisel.vit_style_2,num,none,FALSE,FALSE
+vit_mis_kpi1010,vit_profit_and_balance.vit_mis_report2,cogs_sales_channel,Sales,AccountingNone,11,vit_mis_kisel.vit_style_2,num,none,FALSE,FALSE
+vit_mis_kpi1011,vit_profit_and_balance.vit_mis_report2,cogs_general_service,General,AccountingNone,12,vit_mis_kisel.vit_style_2,num,none,FALSE,FALSE
+vit_mis_kpi1012,vit_profit_and_balance.vit_mis_report2,cogs_telco_infra_structure,Telco,AccountingNone,13,vit_mis_kisel.vit_style_2,num,none,FALSE,FALSE
+vit_mis_kpi1013,vit_profit_and_balance.vit_mis_report2,cogs_packaging,Packaging,AccountingNone,14,vit_mis_kisel.vit_style_2,num,none,FALSE,FALSE
+vit_mis_kpi1014,vit_profit_and_balance.vit_mis_report2,cogs_default,Default,AccountingNone,15,vit_mis_kisel.vit_style_2,num,none,FALSE,FALSE
+vit_mis_kpi1015,vit_profit_and_balance.vit_mis_report2,total_cogs,Total,AccountingNone,16,vit_mis_kisel.vit_style_5,num,none,FALSE,FALSE
+vit_mis_kpi1016,vit_profit_and_balance.vit_mis_report2,gross_profit,Gross,AccountingNone,17,vit_mis_kisel.vit_style_1,num,none,FALSE,FALSE
+vit_mis_kpi1017,vit_profit_and_balance.vit_mis_report2,operating_expense,Operating,AccountingNone,18,vit_mis_kisel.vit_style_1,num,none,FALSE,FALSE
+vit_mis_kpi1018,vit_profit_and_balance.vit_mis_report2,personnel_expense,Personnel,AccountingNone,19,vit_mis_kisel.vit_style_2,num,none,FALSE,FALSE
+vit_mis_kpi1019,vit_profit_and_balance.vit_mis_report2,general_adm_expense,General,AccountingNone,20,vit_mis_kisel.vit_style_2,num,none,FALSE,FALSE
+vit_mis_kpi1020,vit_profit_and_balance.vit_mis_report2,marketing_expense,Marketing,AccountingNone,21,vit_mis_kisel.vit_style_2,num,none,FALSE,FALSE
+vit_mis_kpi1021,vit_profit_and_balance.vit_mis_report2,total_operating_expense,Total,AccountingNone,22,vit_mis_kisel.vit_style_5,num,none,FALSE,FALSE
+vit_mis_kpi1022,vit_profit_and_balance.vit_mis_report2,ebitda,EBITDA,AccountingNone,23,vit_mis_kisel.vit_style_1,num,none,FALSE,FALSE
+vit_mis_kpi1023,vit_profit_and_balance.vit_mis_report2,depreciation_amortization,Depreciation & Amortization Expense,AccountingNone,24,vit_mis_kisel.vit_style_1,num,none,FALSE,FALSE
+vit_mis_kpi1024,vit_profit_and_balance.vit_mis_report2,depreciation,Depreciation,AccountingNone,25,vit_mis_kisel.vit_style_2,num,none,FALSE,FALSE
+vit_mis_kpi1025,vit_profit_and_balance.vit_mis_report2,amortization,Amortization,AccountingNone,26,vit_mis_kisel.vit_style_2,num,none,FALSE,FALSE
+vit_mis_kpi1026,vit_profit_and_balance.vit_mis_report2,total_depreciation_amortization,Total,AccountingNone,27,vit_mis_kisel.vit_style_5,num,none,FALSE,FALSE
+vit_mis_kpi1027,vit_profit_and_balance.vit_mis_report2,ebit,EBIT,AccountingNone,28,vit_mis_kisel.vit_style_1,num,none,FALSE,FALSE
+vit_mis_kpi1028,vit_profit_and_balance.vit_mis_report2,other_expense_income,Other Expense (Income),AccountingNone,29,vit_mis_kisel.vit_style_1,num,none,FALSE,FALSE
+vit_mis_kpi1029,vit_profit_and_balance.vit_mis_report2,other_income,Other income,AccountingNone,30,vit_mis_kisel.vit_style_2,num,none,FALSE,FALSE
+vit_mis_kpi1030,vit_profit_and_balance.vit_mis_report2,other_expense,Other expense,AccountingNone,31,vit_mis_kisel.vit_style_2,num,none,FALSE,FALSE
+vit_mis_kpi1031,vit_profit_and_balance.vit_mis_report2,provision_for_income_tax_final,Provision For Income Tax (Final),AccountingNone,32,vit_mis_kisel.vit_style_1,num,none,FALSE,FALSE
+vit_mis_kpi1032,vit_profit_and_balance.vit_mis_report2,ebt,EBT,AccountingNone,33,vit_mis_kisel.vit_style_1,num,none,FALSE,FALSE
+vit_mis_kpi1033,vit_profit_and_balance.vit_mis_report2,provision_for_income_tax_non_fin,Provision For Income Tax (Non Final),AccountingNone,34,vit_mis_kisel.vit_style_1,num,none,FALSE,FALSE
+vit_mis_kpi1034,vit_profit_and_balance.vit_mis_report2,provision_for_income_tax_tangguh,Provision For Income Tax (Tangguhan),AccountingNone,35,vit_mis_kisel.vit_style_1,num,none,FALSE,FALSE
+vit_mis_kpi1035,vit_profit_and_balance.vit_mis_report2,other_comprehensive_income,Other comprehensive income,AccountingNone,36,vit_mis_kisel.vit_style_1,num,none,FALSE,FALSE
+vit_mis_kpi1036,vit_profit_and_balance.vit_mis_report2,eat,EAT (Nett Income),AccountingNone,37,vit_mis_kisel.vit_style_5,num,none,FALSE,FALSE
