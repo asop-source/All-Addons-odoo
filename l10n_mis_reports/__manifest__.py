@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Vit Profit And Balance",
+    'name': "Indonesian Profit Loss and Balance Sheet Reports for MIS Builder",
 
     'summary': """
-        Penambahan Profit and Loss
-        Penambahan Balance Sheet
+        Report Profit and Loss
+        report Balance Sheet
         """,
 
     'description': """
         Long description of module's purpose
     """,
 
-    'author': "asopkarawang@gmail.com",
+    'author': "Asop <vitraining.com>",
     'website': "http://www.vitraining.com",
 
     # Categories can be used to filter modules in modules listing
