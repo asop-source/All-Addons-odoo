@@ -1,10 +1,10 @@
 id,report_id:id,name,description,expression,sequence,style_id:id,type,accumulation_method,auto_expand_accounts,auto_expand_accounts_style_id:id
-vit_mis_kpi100,vit_profit_and_balance.vit_mis_report3,aktiva,Aktiva,AccountingNone,1,vit_mis_kisel.vit_style_1,num,none,FALSE,FALSE
-vit_mis_kpi101,vit_profit_and_balance.vit_mis_report3,aktiva_lancar,Aktiva Lancar,AccountingNone,2,vit_mis_kisel.vit_style_2,num,none,FALSE,FALSE
-vit_mis_kpi102,vit_profit_and_balance.vit_mis_report3,aktiva_tetap,Aktiva Tetap,AccountingNone,3,vit_mis_kisel.vit_style_2,num,none,FALSE,FALSE
-vit_mis_kpi103,vit_profit_and_balance.vit_mis_report3,total_aktiva,Total Aktiva,AccountingNone,4,vit_mis_kisel.vit_style_5,num,none,FALSE,FALSE
-vit_mis_kpi104,vit_profit_and_balance.vit_mis_report3,pasiva,Pasiva,AccountingNone,5,vit_mis_kisel.vit_style_1,num,none,FALSE,FALSE
-vit_mis_kpi105,vit_profit_and_balance.vit_mis_report3,hutang,Hutang,AccountingNone,6,vit_mis_kisel.vit_style_2,num,none,FALSE,FALSE
-vit_mis_kpi106,vit_profit_and_balance.vit_mis_report3,modal,Modal,AccountingNone,7,vit_mis_kisel.vit_style_2,num,none,FALSE,FALSE
-vit_mis_kpi107,vit_profit_and_balance.vit_mis_report3,laba_rugi,Laba Rugi Tahun Berjalan,AccountingNone,8,vit_mis_kisel.vit_style_2,num,none,FALSE,FALSE
-vit_mis_kpi108,vit_profit_and_balance.vit_mis_report3,total_pasiva,Total Pasiva,AccountingNone,9,vit_mis_kisel.vit_style_5,num,none,FALSE,FALSE
+vit_mis_kpi100,vit_profit_and_balance.vit_mis_report3,aktiva,Aktiva,AccountingNone,1,vit_mis_kisel.vit_style_1,num,none,FALSE,
+vit_mis_kpi101,vit_profit_and_balance.vit_mis_report3,aktiva_lancar,Aktiva Lancar,AccountingNone,2,vit_mis_kisel.vit_style_2,num,none,FALSE,
+vit_mis_kpi102,vit_profit_and_balance.vit_mis_report3,aktiva_tetap,Aktiva Tetap,AccountingNone,3,vit_mis_kisel.vit_style_2,num,none,FALSE,
+vit_mis_kpi103,vit_profit_and_balance.vit_mis_report3,total_aktiva,Total Aktiva,AccountingNone,4,vit_mis_kisel.vit_style_5,num,none,FALSE,
+vit_mis_kpi104,vit_profit_and_balance.vit_mis_report3,pasiva,Pasiva,AccountingNone,5,vit_mis_kisel.vit_style_1,num,none,FALSE,
+vit_mis_kpi105,vit_profit_and_balance.vit_mis_report3,hutang,Hutang,AccountingNone,6,vit_mis_kisel.vit_style_2,num,none,FALSE,
+vit_mis_kpi106,vit_profit_and_balance.vit_mis_report3,modal,Modal,AccountingNone,7,vit_mis_kisel.vit_style_2,num,none,FALSE,
+vit_mis_kpi107,vit_profit_and_balance.vit_mis_report3,laba_rugi,Laba Rugi Tahun Berjalan,AccountingNone,8,vit_mis_kisel.vit_style_2,num,none,FALSE,
+vit_mis_kpi108,vit_profit_and_balance.vit_mis_report3,total_pasiva,Total Pasiva,AccountingNone,9,vit_mis_kisel.vit_style_5,num,none,FALSE,
