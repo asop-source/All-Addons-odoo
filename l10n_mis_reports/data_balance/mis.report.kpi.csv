@@ -17,4 +17,3 @@ vit_mis_kpi114,vit_profit_and_balance.vit_mis_report3,modal,Modal,AccountingNone
 vit_mis_kpi115,vit_profit_and_balance.vit_mis_report3,cadang_modal,Cadang Modal,balp[312%],15,vit_mis_kisel.vit_style_3,num,sum,TRUE,vit_mis_kisel.vit_style_4
 vit_mis_kpi116,vit_profit_and_balance.vit_mis_report3,laba_rugi,Laba Rugi Tahun Berjalan,balp[315%],16,vit_mis_kisel.vit_style_3,num,sum,TRUE,vit_mis_kisel.vit_style_4
 vit_mis_kpi117,vit_profit_and_balance.vit_mis_report3,total_pasiva,Total Pasiva,hutang_pendek+hutang_panjang+cadang_modal+laba_rugi,17,vit_mis_kisel.vit_style_5,num,sum,FALSE,
-vit_mis_kpi118,vit_profit_and_balance.vit_mis_report3,jumlah,Jumlah Aktiva Dan Pasiva,total_aktiva+total_pasiva,18,vit_mis_kisel.vit_style_5,num,none,FALSE,
