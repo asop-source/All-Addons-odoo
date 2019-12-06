@@ -1,0 +1,20 @@
+id,report_id:id,name,description,expression,sequence,style_id:id,type,accumulation_method,auto_expand_accounts,auto_expand_accounts_style_id:id
+vit_mis_kpi100,vit_profit_and_balance.vit_mis_report3,aktiva,Aktiva,AccountingNone,1,vit_mis_kisel.vit_style_1,num,none,FALSE,
+vit_mis_kpi101,vit_profit_and_balance.vit_mis_report3,aktiva_lancar,Aktiva Lancar,AccountingNone,2,vit_mis_kisel.vit_style_2,num,none,FALSE,
+vit_mis_kpi102,vit_profit_and_balance.vit_mis_report3,kas_stara,Kas dan Stara Kas,AccountingNone,3,vit_mis_kisel.vit_style_2,num,none,FALSE,
+vit_mis_kpi103,vit_profit_and_balance.vit_mis_report3,kas,Kas,balp[1111%],4,vit_mis_kisel.vit_style_3,num,sum,TRUE,vit_mis_kisel.vit_style_4
+vit_mis_kpi104,vit_profit_and_balance.vit_mis_report3,bank,Bank,balp[1114%],5,vit_mis_kisel.vit_style_3,num,sum,TRUE,vit_mis_kisel.vit_style_4
+vit_mis_kpi105,vit_profit_and_balance.vit_mis_report3,piutang,Piutang,balp[1120%],6,vit_mis_kisel.vit_style_3,num,sum,TRUE,vit_mis_kisel.vit_style_4
+vit_mis_kpi106,vit_profit_and_balance.vit_mis_report3,persediaan,Persediaan,balp[1130%],7,vit_mis_kisel.vit_style_3,num,sum,TRUE,vit_mis_kisel.vit_style_4
+vit_mis_kpi107,vit_profit_and_balance.vit_mis_report3,aktiva_tidak_lancar,Aktiva Tidak Lancar,AccountingNone,8,vit_mis_kisel.vit_style_2,num,none,FALSE,
+vit_mis_kpi108,vit_profit_and_balance.vit_mis_report3,aktiva_tetap,Aktiva Tetap,balp[1220%],9,vit_mis_kisel.vit_style_3,num,sum,TRUE,vit_mis_kisel.vit_style_4
+vit_mis_kpi109,vit_profit_and_balance.vit_mis_report3,total_aktiva,Total Aktiva,kas+bank+piutang+persediaan+aktiva_tetap,10,vit_mis_kisel.vit_style_5,num,sum,FALSE,
+vit_mis_kpi110,vit_profit_and_balance.vit_mis_report3,pasiva,Pasiva,AccountingNone,11,vit_mis_kisel.vit_style_1,num,none,FALSE,
+vit_mis_kpi111,vit_profit_and_balance.vit_mis_report3,hutang,Hutang,AccountingNone,12,vit_mis_kisel.vit_style_2,num,none,FALSE,
+vit_mis_kpi112,vit_profit_and_balance.vit_mis_report3,hutang_pendek,Hutang Jangka Pendek,balp[2100%],13,vit_mis_kisel.vit_style_3,num,sum,TRUE,vit_mis_kisel.vit_style_4
+vit_mis_kpi113,vit_profit_and_balance.vit_mis_report3,hutang_panjang,Hutang Jangka Panjang,balp[2200%],13,vit_mis_kisel.vit_style_3,num,sum,TRUE,vit_mis_kisel.vit_style_4
+vit_mis_kpi114,vit_profit_and_balance.vit_mis_report3,modal,Modal,AccountingNone,14,vit_mis_kisel.vit_style_2,num,none,FALSE,
+vit_mis_kpi115,vit_profit_and_balance.vit_mis_report3,cadang_modal,Cadang Modal,balp[312%],15,vit_mis_kisel.vit_style_3,num,sum,TRUE,vit_mis_kisel.vit_style_4
+vit_mis_kpi116,vit_profit_and_balance.vit_mis_report3,laba_rugi,Laba Rugi Tahun Berjalan,balp[315%],16,vit_mis_kisel.vit_style_3,num,sum,TRUE,vit_mis_kisel.vit_style_4
+vit_mis_kpi117,vit_profit_and_balance.vit_mis_report3,total_pasiva,Total Pasiva,hutang_pendek+hutang_panjang+cadang_modal+laba_rugi,17,vit_mis_kisel.vit_style_5,num,sum,FALSE,
+vit_mis_kpi118,vit_profit_and_balance.vit_mis_report3,jumlah,Jumlah Aktiva Dan Pasiva,total_aktiva+total_pasiva,18,vit_mis_kisel.vit_style_5,num,none,FALSE,
