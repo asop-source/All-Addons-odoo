@@ -1,0 +1,20 @@
+<odoo>
+   <data>
+
+               <menuitem 
+                  id="vit_product_request.menu_request_root"
+                  sequence="11"
+                  name="Purchase Request" />
+               <menuitem 
+                  id="vit_product_request.menu_request_sub"
+                  sequence="12"
+                  parent="vit_product_request.menu_request_root"
+                  name="Purchase Request" />
+                <menuitem
+                  id="menu_product_request"
+                  sequence="13"
+                  name="Purchase Request"
+                  parent="vit_product_request.menu_request_sub"
+                  groups="purchase.group_purchase_user"/>
+    </data>
+</odoo>
