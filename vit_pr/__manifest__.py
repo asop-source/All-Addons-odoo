@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "vit pr",
+    'name': "Vit Purchase Request",
 
     'summary': """
         Rename Product Request = Purchase Request
@@ -26,8 +26,8 @@
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
-        'views/menu.xml',
-        'views/templates.xml',
+        'views/views.xml',
+        'views/location_business.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

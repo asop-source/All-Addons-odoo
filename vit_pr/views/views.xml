@@ -1,0 +1,43 @@
+<odoo>
+   <data>
+
+        <record model="ir.actions.act_window" id="action_product_request">
+          <field name="name">Purchase Request</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">vit.product.request</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">tree,form</field>
+      </record>
+
+
+        <menuitem 
+          id="vit_product_request.menu_request_root"
+          sequence="11"
+          name="Purchase Request" />
+        <menuitem 
+          id="vit_product_request.menu_request_sub"
+          sequence="12"
+          parent="vit_product_request.menu_request_root"
+          name="Purchase Request" />
+        <menuitem
+          id="vit_product_request.menu_product_request"
+          sequence="13" 
+          name="Purchase Request"
+          parent="vit_product_request.menu_request_sub"
+          action="action_product_request"
+          groups="purchase.group_purchase_user"/>
+
+      
+        <menuitem 
+          id="vit_product_request.menu_request_sub2"
+          sequence="3"
+          parent="purchase.menu_procurement_management"
+          name="Purchase Request"/>
+        <menuitem
+          id="vit_product_request.menu_product_request2"
+          sequence="14"
+          name="Purchase Request"
+          parent="vit_product_request.menu_request_sub2"
+          action="vit_product_request.action_new_product_request2"/>   
+    </data>
+</odoo>

@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_vit_account_jurnal_entries_vit_account_jurnal_entries,vit_account_jurnal_entries.vit_account_jurnal_entries,model_vit_account_jurnal_entries_vit_account_jurnal_entries,,1,0,0,0
