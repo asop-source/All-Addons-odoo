@@ -2,14 +2,9 @@
 
 from odoo import models, fields, api
 
-# class vit_pr(models.Model):
-#     _name = 'vit_pr.vit_pr'
+class product_request(models.Model):
+    _name = 'vit.product.request'
+    _inherit = 'vit.product.request'
 
-#     name = fields.Char()
-#     value = fields.Integer()
-#     value2 = fields.Float(compute="_value_pc", store=True)
-#     description = fields.Text()
-#
-#     @api.depends('value')
-#     def _value_pc(self):
-#         self.value2 = float(self.value) / 100
+    location_id = fields.Many2one(comodel_name="account.analytic.tag", string="Location", required=False, )
+    business_id = fields.Many2one(comodel_name="account.analytic.tag", string="Business", required=False, )
