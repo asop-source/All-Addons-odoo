@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "vit invoice bill",
+    'name': "vit overtime mounth",
 
     'summary': """
-        Add Unit
-        Add Lokasi - Bisnis
+        Set Default Mounth
+
         """,
 
     'description': """
@@ -21,14 +21,13 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','account'],
+    'depends': ['base','vit_overtime_hress'],
 
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
         'views/views.xml',
-        'views/bill.xml',
-        'views/tax.xml',
+        'views/templates.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
