@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+                <record id="paperformat_f4" model="report.paperformat">
+                    <field name="name">F4 new</field>
+                    <field name="default" eval="True" />
+                    <field name="format">Folio</field>
+                    <field name="page_height">0</field>
+                    <field name="page_width">0</field>
+                    <field name="orientation">Portrait</field>
+                    <field name="margin_top">2</field>
+                    <field name="margin_bottom">2</field>
+                    <field name="margin_left">2</field>
+                    <field name="margin_right">2</field>
+                    <field name="header_line" eval="False" />
+                    <field name="header_spacing">0</field>
+                    <field name="dpi">90</field>
+                </record>
+
+            <report 
+                id="vit_report_mrp3"
+                string="Kartu Produksi 1/3"
+                model="mrp.production" 
+                report_type="qweb-pdf"
+                paperformat="vit_report_mrp3.paperformat_f4"
+                file="vit_report_mrp3.kartu_prod_report" 
+                name="vit_report_mrp3.kartu_prod_report" 
+            />
+
+                    <template id="external_layout_card">
+                        <t t-if="not o" t-set="o" t-value="doc"/>
+
+                        <t t-if="not company">
+                            <!-- Multicompany -->
+                            <t t-if="company_id">
+                                <t t-set="company" t-value="company_id"/>
+                            </t>
+                            <t t-elif="o and 'company_id' in o">
+                                <t t-set="company" t-value="o.company_id.sudo()"/>
+                            </t>
+                            <t t-else="else">
+                                <t t-set="company" t-value="res_company"/>
+                            </t>
+                        </t>
+                        <t t-call="vit_report_mrp3.external_layout_standard_card"><t t-raw="0"/></t>
+
+                    </template>
+
+                    <template id="external_layout_standard_card">
+
+                        <div class="article o_report_layout_standard"  t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+                            <t t-call="web.address_layout"/>
+                            <t t-raw="0"/>
+                        </div>
+                    </template>
+
+
+
+            <template id="report_kartu_prod_document_add">
+                <t t-call="vit_report_mrp3.external_layout_card">
+                                    <div class="page" style="font-size:12px;">
+                                        <div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <table style="width:100%; text-align: left; padding: 0px;border: 1px solid black;" class="table" >
+                                                      <tr >
+                                                        <td style="border: 1px solid black;">Tanggal Order</td>
+                                                        <td style="border: 1px solid black;"><span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"/></td>
+                                                        <td style="border: 1px solid black;">Delivery <br/>
+                                                        <b><font size="4"><span t-esc="(context_timestamp(o.date_planned_start) + datetime.timedelta(days=31) ).strftime('%b')"/></font></b>
+                                                        <!-- <span t-esc="( datetime.strptime(o.date_planned_start, '%Y-%m-%d %H:%M:%S') + datetime.timedelta(months=1) ).strftime('%b')" /> -->
+                                                        </td>
+                                                        <td style="border: 1px solid black;">Customer<br/>
+                                                        <b><font size="4"><span t-if="not o.customer_id.child_ids" t-field="o.customer_id.name"/><span t-if="o.customer_id.child_ids" t-field="o.customer_id.child_ids[0].name"/></font></b>
+                                                        </td>
+                                                      </tr>
+                                                      <tr style="border: 1px solid black;">
+                                                        <td>Pcs/Lot</td>
+                                                        <td style="border: 1px solid black;"><span t-field="o.product_qty" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 0}"/></td>
+                                                        <td><font size="1">No.PolyBox</font></td>
+                                                        <td style="border: 1px solid black;">1/3  <span t-field="o.product_id.no_poly"/></td>
+                                                      </tr>
+                                                      <tr style="border: 1px solid black;">
+                                                        <td style="border: 1px solid black;">No. P/O</td>
+                                                        <td style="border: 1px solid black;" colspan="3"><b><font size="4"><span t-field="o.name"/></font></b></td>
+                                                      </tr>
+                                                    </table>
+                                                    <table style="width:100%; text-align: left; padding: 0px;" class="table table-bordered">
+                                                      <tr>
+                                                        <td style="border: 1px solid black;">Cust Code</td>
+                                                        <td style="border: 1px solid black;" colspan="4"><b><font size="3"><span t-field="o.code_cust_id.product_code"/></font></b></td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td style="border: 1px solid black;">Type Size</td>
+                                                        <td style="border: 1px solid black;" colspan="4"><b><font size="3"><span t-field="o.product_id.name"/></font></b></td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td style="border: 1px solid black;">Spesial No.</td>
+                                                        <td style="border: 1px solid black;" colspan="4"><b><font size="3"><span t-field="o.product_id.NoSpec"/></font></b></td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td style="border: 1px solid black;">Jenis PLT</td>
+                                                        <td style="border: 1px solid black;"><span t-field="o.product_id.plt"/></td>
+                                                        <td style="border: 1px solid black;">Quality</td>
+                                                        <td style="border: 1px solid black;" colspan="2"/>
+                                                      </tr>
+                                                      <tr>
+                                                        <td style="border: 1px solid black;">Wire</td>
+                                                        <td style="border: 1px solid black;" colspan="4"> 
+                                                            <span t-foreach="o.bom_id.bom_line_ids" t-as="t">
+                                                                   <span><t t-esc="t.product_id.name"/></span>
+                                                                   <!-- <span t-if="not t.domain=='ipi'"><t t-esc="0.00" /></span> -->
+                                                            </span>
+                                                        </td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td style="border: 1px solid black;">Tanggal Kirim</td>
+                                                        <td style="border: 1px solid black;">HD : <span t-esc="context_timestamp(o.date_planned_start).strftime('%d/%m/%Y')"/> <br/>
+                                                        FG : <span t-esc="(context_timestamp(o.date_planned_start) + datetime.timedelta(days=31) ).strftime('%d/%m/%Y')"/>
+                                                        </td>
+                                                        <td style="border: 1px solid black;">Berat/KG<br/>Heading</td>
+                                                        <td style="border: 1px solid black;" colspan="2"><span t-field="o.product_id.kg_pal"/>/PAL<br/>
+                                                                <span t-field="o.product_id.heading"/>/LOT</td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td style="border: 1px solid black;">1 Box isi (Pcs)</td>
+                                                        <td style="border: 1px solid black;"><t t-esc="(o.product_qty / 3)" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 0}"/></td>
+                                                        <td style="border: 1px solid black;"> Berat/KG<br/>Wash/Fum</td>
+                                                        <td style="border: 1px solid black;" colspan="2"/>
+                                                      </tr>
+                                                        <!--<tr>
+                                                          <td>No. Heat</td>
+                                                          <td></td>
+                                                          <td></td>
+                                                          <td colspan="2" rowspan="2" style="padding: 1px;  text-align: center; width: 70px; height:70px;">
+                                                            <img style="width:100%;height:100%;" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR', o.name + '.' + '1/3' + '.' + '180', 50, 50)"/>
+                                                          </td>
+                                                        </tr>
+                                                        <tr>
+                                                          <td>No. Coil</td>
+                                                          <td></td>
+                                                          <td></td>
+                                                       </tr>-->
+                                                     <tr>
+                                                        <td style="border: 1px solid black;" >No. Heat <br/> No. Coil</td>
+                                                        <td style="border: 1px solid black;" ></td>
+                                                        <td style="border: 1px solid black;" ></td>
+                                                        <!-- <td></td> -->
+                                                        <td style="padding: 0px; border: 1px solid black; text-align: center; width: 70px; height:70px;">
+                                                            <img style="width:100%;height:100%;" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR', o.name + '.' + '1/3' + '.' + '180', 50, 50)"/>
+                                                        </td>
+                                                      </tr>
+                                                    </table>
+                                                    PT. NITTO ALAM INDONESIA   <span t-field="o.company_id"/>      Rev.Dwg:         Rev.Tools:
+                                                </div>
+                                                <div class="col-6">
+                                                    <table style="width:100%; text-align: left; padding: 0px;" class="table table-bordered" bordercolor="#aaa">
+                                                      <tr>
+                                                        <td style="width: 80px; height:80px; border: 1px solid black;">
+                                                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR', o.name + '.' + '1/3' + '.' + o.product_id.name, 70, 70)" style="width:100%;height:100%;"/>
+                                                            Proses
+                                                        </td>
+                                                        <td style="border: 1px solid black;">Tanggal</td>
+                                                        <td style="border: 1px solid black;">No. Mesin</td>
+                                                        <td style="border: 1px solid black;">OPT</td>
+                                                        <td style="border: 1px solid black;">V'TOR</td>
+                                                        <td style="border: 1px solid black;">CEK</td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td style="border: 1px solid black;">H</td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td style="border: 1px solid black;">R</td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td style="border: 1px solid black;">SI <b>AYAK</b></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td style="border: 1px solid black;">W</td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td style="border: 1px solid black;">F  <b>O@</b></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td style="border: 1px solid black;">Zin</td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td style="border: 1px solid black;">Bak</td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td style="border: 1px solid black;">Cr</td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td style="border: 1px solid black;">MS</td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td style="border: 1px solid black;">MJ</td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td style="border: 1px solid black;">CD</td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td style="border: 1px solid black;">PK</td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                          <td style="border: 1px solid black;"></td>
+                                                      </tr>
+
+<!--                         <tr>
+                           <td rowspan ="3" style="border: 1px solid black;">PL 5U
+                              <td style="border: 1px solid black;" >Zin</td>
+                              <td style="border: 1px solid black;"></td>
+                              <td style="border: 1px solid black;"></td>
+                              <td style="border: 1px solid black;"></td>
+                              <td style="border: 1px solid black;"></td>
+                              <td style="border: 1px solid black;"></td>
+                            <tr>
+                              <td style="border: 1px solid black;">Bak</td>
+                              <td style="border: 1px solid black;" >Zin</td>
+                              <td style="border: 1px solid black;"></td>
+                              <td style="border: 1px solid black;"></td>
+                              <td style="border: 1px solid black;"></td>
+                              <td style="border: 1px solid black;"></td>
+                              <td style="border: 1px solid black;"></td>
+                            </tr>
+                            <tr>
+                              <td style="border: 1px solid black;">Cr</td>
+                              <td style="border: 1px solid black;" >Zin</td>
+                              <td style="border: 1px solid black;"></td>
+                              <td style="border: 1px solid black;"></td>
+                              <td style="border: 1px solid black;"></td>
+                              <td style="border: 1px solid black;"></td>
+                              <td style="border: 1px solid black;"></td>
+                          </tr>
+                      </tr> -->
+
+                                                     <tr t-foreach="o.routing_id.operation_ids" t-as="line" style="text-align: right;" >
+                                                        <td style="border: 1px solid black; text-align: left;"><span t-field="line.name"/> <span t-if="line.note" t-field="line.note"/></td>
+                                                        <td style="border: 1px solid black;"/>
+                                                        <td style="border: 1px solid black;"/>
+                                                        <td style="border: 1px solid black;"/>
+                                                        <td style="border: 1px solid black;"/>
+                                                        <td style="border: 1px solid black;"/>
+                                                      </tr>
+                                                    </table>
+                                                    <span t-field="o.product_id.No_Registrasi"/>   <span t-field="o.product_id.warna"/>      [F-C. 1-01-R.01/18/01/05]
+                                                </div>
+                                                <hr/>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <table class="table" style="padding: 0px;">
+                                                      <tr>
+                                                        <td style="padding: 1px; width: 60px; height:60px; border: 1px solid black;">
+                                                            <br/>
+                                                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR', o.product_id.name + '.' + o.customer_id.name + '.' + o.name + '.' + '1/3' + '.' + '180' + '.' + '1' + '.' + '3' + '.' + context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y'), 80, 80)" style="width:100%;height:100%;"/>
+                                                        </td>
+                                                        <td style="border: 1px solid black;">
+                                                            Stock Opname WIP<br/>
+                                                            Prosess : H-R-P-PL-FQ<br/>
+                                                            Tgl : <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"/>  <b>3</b>   <b>1/3</b>
+                                                        </td>
+                                                      </tr>
+                                                    </table>
+                                                    <table style="width:100%; text-align: left;  padding: 0px; font-size:8px;" class="table table-bordered">
+                                                          <tr>
+                                                            <td style="border: 1px solid black;">
+                                                                Type
+                                                            </td>
+                                                            <td style="border: 1px solid black;">
+                                                                Nospec
+                                                            </td>
+                                                            <td style="border: 1px solid black;">
+                                                                User
+                                                            </td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td style="font-size:8px;border: 1px solid black;">
+                                                                <b><span t-field="o.product_id"/></b>
+                                                            </td>
+                                                            <td style="border: 1px solid black;">
+                                                                <span t-field="o.product_id.NoSpec"/>
+                                                            </td>
+                                                            <td style="border: 1px solid black;">
+                                                              <span t-field="o.customer_id.name"/>
+                                                            </td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td style="font-size:8px;border: 1px solid black;">
+                                                                Nopo.<span t-field="o.name"/>
+                                                            </td>
+                                                            <td style="border: 1px solid black;">
+                                                                Qty/Kg
+                                                            </td>
+                                                            <td style="border: 1px solid black;">
+                                                            </td>
+                                                          </tr>
+                                                        </table>
+
+                                                </div>
+                                                <div class="col-4">
+                                                    <table class="table" style="padding: 0px;">
+                                                      <tr>
+                                                        <td style="padding: 1px; width: 60px; height:60px; border: 1px solid black;">
+                                                            <br/>
+                                                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR', o.product_id.name + '.' + o.customer_id.name + '.' + o.name + '.' + '1/3' + '.' + '180' + '.' + '1' + '.' + '2' + '.' + context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y'), 80, 80)" style="width:100%;height:100%;"/>
+                                                        </td>
+                                                        <td style="border: 1px solid black;">
+                                                            Stock Opname WIP<br/>
+                                                            Prosess : H-R-P-PL-FQ <br/>
+                                                            Tgl : <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"/>  <b>2</b>   <b>1/3</b>
+                                                        </td>
+                                                      </tr>
+                                                    </table>
+                                                    <table style="width:100%; text-align: left; padding: 0px; font-size:8px;" class="table table-bordered">
+                                                          <tr>
+                                                            <td style="border: 1px solid black;">
+                                                                Type
+                                                            </td>
+                                                            <td style="border: 1px solid black;">
+                                                                Nospec
+                                                            </td>
+                                                            <td style="border: 1px solid black;">
+                                                                User
+                                                            </td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td style="font-size:8px;border: 1px solid black;">
+                                                                <b><span t-field="o.product_id"/></b>
+                                                            </td>
+                                                            <td style="border: 1px solid black;">
+                                                                <span t-field="o.product_id.NoSpec"/>
+                                                            </td>
+                                                            <td style="border: 1px solid black;">
+                                                              <span t-field="o.customer_id.name"/>
+                                                            </td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td style="font-size:8px;border: 1px solid black;">
+                                                                Nopo.<span t-field="o.name"/>
+                                                            </td>
+                                                            <td style="border: 1px solid black;">
+                                                                Qty/Kg
+                                                            </td>
+                                                            <td style="border: 1px solid black;">
+                                                            </td>
+                                                          </tr>
+                                                        </table>
+
+                                                </div>
+                                                <div class="col-4">
+                                                    <table class="table" style="padding: 0px;">
+                                                      <tr>
+                                                        <td style="padding: 1px; width: 60px; height:60px; border: 1px solid black;">
+                                                            <br/>
+                                                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR', o.product_id.name + '.' + o.customer_id.name + '.' + o.name + '.' + '2/3' + '.' + '180' + '.' + '1' + '.' + '1' + '.' + context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y'), 80, 80)" style="width:100%;height:100%;"/>
+                                                        </td>
+                                                       <td style="border: 1px solid black;">
+                                                            Stock Opname WIP<br/>
+                                                            Prosess : H-R-P-PL-FQ<br/>
+                                                            Tgl : <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"/>  <b>1</b>   <b>1/3</b>
+                                                        </td>
+                                                      </tr>
+                                                    </table>
+                                                    <table style="width:100%; text-align: left; padding: 0px; font-size:8px;" class="table table-bordered">
+                                                          <tr>
+                                                            <td style="border: 1px solid black;">
+                                                                Type
+                                                            </td>
+                                                            <td style="border: 1px solid black;">
+                                                                Nospec
+                                                            </td>
+                                                            <td style="border: 1px solid black;">
+                                                                User
+                                                            </td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td style="font-size:8px;border: 1px solid black;">
+                                                                <b><span t-field="o.product_id"/></b>
+                                                            </td>
+                                                            <td style="border: 1px solid black;">
+                                                                <span t-field="o.product_id.NoSpec"/>
+                                                            </td>
+                                                            <td style="border: 1px solid black;">
+                                                              <span t-field="o.customer_id.name"/>
+                                                            </td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td style="font-size:8px;border: 1px solid black;">
+                                                                Nopo.<span t-field="o.name"/>
+                                                            </td>
+                                                            <td style="border: 1px solid black;">
+                                                                Qty/Kg
+                                                            </td>
+                                                            <td style="border: 1px solid black;">
+                                                            </td>
+                                                          </tr>
+                                                        </table>
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <table class="table" style="padding: 0px;">
+                                                      <tr>
+                                                        <td>
+                                                            SUB KARTU
+                                                        </td>
+                                                        <td style="padding: 1px; width: 60px; height:60px;">
+                                                             <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR', o.name + '.' + '2/3' + '.' + o.code_cust_id.product_code, 70, 70)" style="width:100%;height:100%;"/>
+                                                        </td>
+                                                      </tr>
+                                                    </table>
+                                                    <b><h4><span t-field="o.name"/></h4></b>
+                                                    <h4>3/3</h4>
+                                                    <b><h4><span t-field="o.product_id"/></h4></b>
+                                                    <div class="row">
+                                                    <div class="col-6">
+                                                      
+                                                      <br/>
+                                                      <br/>
+                                                      
+                                                        <h4>F1</h4><br/>
+                                                        <h4><t t-esc="(o.product_qty / 3)" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 0}"/>
+                                                    </h4></div>
+                                                    <div class="col-6">
+                                                        <table style="width:100%; text-align: left; padding: 0px; font-size:10px;" class="table table-bordered">
+                                                          <tr>
+                                                            <td style="border: 1px solid black;">
+                                                                Berat/KG<br/>
+                                                                Heading
+                                                            </td>
+                                                            <td style="border: 1px solid black;">
+                                                                <span t-field="o.product_id.kg_pal"/>
+                                                                    
+                                                            </td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td style="border: 1px solid black;">
+                                                                Berat/KG<br/>
+                                                                Wash/Fum
+                                                            </td>
+                                                            <td style="border: 1px solid black;">
+                                                            </td>
+                                                          </tr>
+                                                        </table>
+                                                    </div>
+                                                    </div>
+                                                    <br/>
+                                                    <div style="font-size:18px;">Customer : <b><span t-field="o.customer_id.name"/></b></div>
+                                                    <div style="font-size:18px;">Cust code : <b style="font-size:18px;"><span t-field="o.code_cust_id.product_code"/></b></div>
+                                                    <table style="width:100%; text-align: left;  padding: 0px;" class="table table-bordered">
+                                                      <tr>
+                                                        <td style="border: 1px solid black;">Proses</td>
+                                                        <td style="border: 1px solid black;">Tanggal</td>
+                                                        <td style="border: 1px solid black;">No. Mesin</td>
+                                                        <td style="border: 1px solid black;">OPR</td>
+                                                        <td style="border: 1px solid black;">V'TOR</td>
+                                                        <td style="border: 1px solid black;">CEK</td>
+                                                      </tr>
+                                                     <tr>
+                                                        <td style="border: 1px solid black;">
+                                                          <t t-foreach="o.workorder_ids.filtered(lambda wrk: wrk.workcenter_id.code == 'F')" t-as="wrk">
+                                                            <span t-esc="wrk.workcenter_id.name"/>
+                                                          </t>
+                                                        </td>
+                                                        <td style="border: 1px solid black;"/>
+                                                        <td style="border: 1px solid black;"/>
+                                                        <td style="border: 1px solid black;"/>
+                                                        <td style="border: 1px solid black;"/>
+                                                        <td style="border: 1px solid black;"/>
+                                                      </tr>
+                                                       <tr>
+                                                        <td style="border: 1px solid black;"/>
+                                                        <td style="border: 1px solid black;"/>
+                                                        <td style="border: 1px solid black;"/>
+                                                        <td style="border: 1px solid black;"/>
+                                                        <td style="border: 1px solid black;"/>
+                                                        <td style="border: 1px solid black;"/>
+                                                      </tr>
+                                                       <tr>
+                                                        <td style="border: 1px solid black;"/>
+                                                        <td style="border: 1px solid black;"/>
+                                                        <td style="border: 1px solid black;"/>
+                                                        <td style="border: 1px solid black;"/>
+                                                        <td style="border: 1px solid black;"/>
+                                                        <td style="border: 1px solid black;"/>
+                                                      </tr>
+                                                      <tr>
+                                                        <td style="border: 1px solid black;"/>
+                                                        <td style="border: 1px solid black;"/>
+                                                        <td style="border: 1px solid black;"/>
+                                                        <td style="border: 1px solid black;"/>
+                                                        <td style="border: 1px solid black;"/>
+                                                        <td style="border: 1px solid black;"/>
+                                                      </tr>
+                                                    </table>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                </t>
+            </template>
+
+            <template id="kartu_prod_report">
+                <t t-call="web.html_container">
+                    <t t-foreach="docs" t-as="o">
+                        <t t-call="vit_report_mrp3.report_kartu_prod_document_add"/>
+                    </t>
+                </t>
+            </template>
+    </data>
+</odoo>
